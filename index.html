@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>خلفية حمراء وقلب في النص</title>
+  <style>
+    body {
+      margin-left: 40px; /* المسافة من الشمال فقط */
+      height: 60vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start; /* يبدأ من الأعلى */
+      background-color: #8B0000; /* أحمر غامق */
+      overflow: hidden; /* عشان القلوب متطلعش بره الصفحة */
+    }
+
+    .heart-container {
+      width: 300px;   
+      height: 300px;  
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 750px; /* الرقم ده يتحكم في نزول القلب تحت */
+    }
+
+    .heart {
+      font-size: 850px; 
+      color: red;
+    }
+
+    /* بداية كود القلوب الصغيرة */
+    .small-heart {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: red;
+      transform: rotate(-45deg);
+      animation: float 4s linear infinite;
+    }
+    .small-heart::before, .small-heart::after {
+      content: "";
+      position: absolute;
+      width: 10px; height: 10px;
+      background: red;
+      border-radius: 50%;
+    }
+    .small-heart::before { top:-5px; left:0; }
+    .small-heart::after { top:0; left:5px; }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(-45deg); opacity:0; }
+      50% { opacity:1; }
+      100% { transform: translateY(-5px) rotate(-45deg); opacity:0; }
+    }
+    /* نهاية كود القلوب الصغيرة */
+
+    /* بداية كود الباسورد والزر */
+    .login-container {
+      position: absolute;
+      top: 50%; /* تقدري تتحكمي بالارتفاع عن طريق تغيير هذه القيمة */
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px; /* المسافة بين المربع والزر */
+    }
+
+    .password-input {
+      width: 250px;       /* عرض المربع */
+      height: 40px;       /* ارتفاع المربع */
+      font-size: 18px;
+      padding: 5px 10px;
+      border: 2px solid #000;
+      border-radius: 8px;
+      background-color: rgba(255,255,255,0); /* خلفية شفافة */
+      color: black;
+      outline: none;
+    }
+
+    .login-button {
+      width: 150px;       /* عرض الزر */
+      height: 45px;       /* ارتفاع الزر */
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff0000; /* أحمر */
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .login-button:hover {
+      background-color: #cc0000;
+    }
+    /* نهاية كود الباسورد والزر */
+  </style>
+</head>
+<body>
+  <div class="heart-container">
+    <div class="heart">❤️</div>
+  </div>
+
+  <div class="login-container">
+    <input type="password" placeholder="أول يوم لينا" class="password-input">
+    <button class="login-button">دخول</button>
+  </div>
+
+  <script>
+    // إنشاء 15 قلب صغير يتحرك عشوائياً
+    for(let i=0;i<15;i++){
+      let h=document.createElement("div");
+      h.className="small-heart";
+      h.style.left=Math.random()*window.innerWidth+"px";
+      h.style.animationDelay=Math.random()*5+"s";
+      document.body.appendChild(h);
+    }
+
+    // عند الضغط على دخول، تعرض كلمة المرور في console
+    document.querySelector('.login-button').addEventListener('click', function() {
+      const pw = document.querySelector('.password-input').value;
+      console.log("كلمة المرور المدخلة: ", pw);
+    });
+
+    // الحل: يجعل الصفحة تبدأ دائمًا من الأعلى عند أي تحميل أو Refresh
+    window.onload = function() {
+      window.scrollTo(0, 0);
+    };
+  </script>
+</body>
+</html>
