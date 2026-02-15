@@ -11,20 +11,32 @@ body {
     position: relative;
     background-color: #8B0000; /* اللون الافتراضي */
     font-family: Arial, sans-serif;
+    overflow: hidden; /* عشان القلوب متطلعش بره الصفحة */
 }
 
-/* --- القلوب الثابتة --- */
+/* --- حاوية القلوب خلف كل العناصر --- */
+.heart-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* 👈 تحت كل العناصر */
+}
+
+/* --- القلوب --- */
 .heart {
     position: absolute;
-    color: red;      /* اللون الافتراضي للقلوب */
+    color: red; /* اللون الافتراضي */
     user-select: none;
+    font-size: 25px; /* حجم القلب */
 }
 
 /* --- المستطيل --- */
 .text-box {
-    width: 60%;           /* 👈 عرض المستطيل */
+    width: 60%;           /* عرض المستطيل */
     min-height: 200px;    /* أقل ارتفاع */
-    margin: 80px auto 60px auto; /* 👈 المسافة من فوق وتحت: margin-top و margin-bottom */
+    margin: 80px auto 60px auto; /* المسافة من فوق وتحت */
     background: rgba(255,255,255,0.2); /* شبه شفاف */
     backdrop-filter: blur(10px);
     border-radius: 40px;  /* حواف دائرية */
@@ -35,13 +47,14 @@ body {
     line-height: 1.8;
     display: block;
     position: relative;
+    z-index: 1; /* 👈 فوق القلوب */
 }
 
 /* --- زرار تغيير الخلفية فوق المستطيل --- */
 .color-button {
     position: absolute;
-    top: -60px;       /* 👈 فوق المستطيل */
-    right: 0;         /* 👈 المسافة من اليمين داخل المستطيل */
+    top: -60px;       /* فوق المستطيل */
+    right: 0;         /* المسافة من اليمين */
     width: 140px;     /* عرض الزرار */
     height: 50px;     /* ارتفاع الزرار */
     font-size: 18px;  /* حجم الخط */
@@ -50,12 +63,17 @@ body {
     border-radius: 12px;
     color: white;
     cursor: pointer;
+    z-index: 1;       /* فوق القلوب */
 }
 </style>
 </head>
 
 <body>
 
+<!-- حاوية القلوب -->
+<div class="heart-container" id="hearts"></div>
+
+<!-- المستطيل -->
 <div class="text-box">
     <button class="color-button" id="colorBtn">تغيير اللون</button>
     اكتبي هنا أي نص 💌  
@@ -63,10 +81,12 @@ body {
 </div>
 
 <script>
-// --- إعدادات القلوب ---
-const numberOfHearts = 30;  // 👈 عدد القلوب
-const heartSize = 25;       // 👈 حجم القلوب
-const heartChar = "❤️";     // 👈 شكل القلب، تقدري تغيّريه لأي رمز آخر
+// --- إعداد القلوب ---
+const numberOfHearts = 30;  // عدد القلوب
+const heartSize = 25;       // حجم القلوب
+const heartChar = "❤️";     // شكل القلب
+
+const heartContainer = document.getElementById("hearts");
 
 for(let i=0; i<numberOfHearts; i++){
     const h = document.createElement("div");
@@ -75,15 +95,15 @@ for(let i=0; i<numberOfHearts; i++){
     h.style.left = Math.random() * (window.innerWidth - heartSize) + "px";
     h.style.top = Math.random() * (window.innerHeight - heartSize) + "px";
     h.innerHTML = heartChar;
-    document.body.appendChild(h);
+    heartContainer.appendChild(h); // 👈 القلوب جوه الحاوية
 }
 
-// --- إعدادات الزرار لتغيير الألوان ---
-let isOriginal = true; // لتبديل بين الألوان
-const originalBg = "#8B0000"; // لون الخلفية الافتراضي
-const originalHeartColor = "red"; // لون القلوب الافتراضي
-const newBg = "#FF69B4";   // اللون الجديد للصفحة
-const newHeartColor = "red"; // لون القلوب بعد تغيير الخلفية
+// --- إعداد الزرار لتغيير الألوان ---
+let isOriginal = true;
+const originalBg = "#8B0000"; 
+const originalHeartColor = "red"; 
+const newBg = "#FF69B4";   
+const newHeartColor = "red";
 
 document.getElementById("colorBtn").addEventListener("click", function(){
     if(isOriginal){
