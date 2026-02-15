@@ -13,7 +13,6 @@ body {
     overflow: hidden;
 }
 
-/* حاوية القلوب خلف كل العناصر */
 .heart-container {
     position: absolute;
     top: 0;
@@ -23,7 +22,6 @@ body {
     z-index: 0;
 }
 
-/* القلوب */
 .heart {
     position: absolute;
     color: red;
@@ -31,17 +29,16 @@ body {
     font-size: 5vw; /* حجم متغير حسب عرض الشاشة */
 }
 
-/* المستطيل */
 .text-box {
-    width: 60%;             /* عرض نسبي */
-    min-height: 20vh;       /* أقل ارتفاع نسبي */
-    margin: 10vh auto;      /* مسافة من فوق وتحت نسبي */
+    width: 60%;
+    min-height: 20vh;
+    margin: 10vh auto;
     background: rgba(255,255,255,0.2);
     backdrop-filter: blur(10px);
     border-radius: 40px;
     padding: 2vh 2vw;
     color: white;
-    font-size: 3vw;         /* حجم نص نسبي */
+    font-size: 3vw;
     text-align: center;
     line-height: 1.8;
     display: block;
@@ -52,12 +49,12 @@ body {
 /* زرار تغيير اللون */
 .color-button {
     position: absolute;
-    top: 5vh;      /* مسافة من أعلى الصفحة */
-    right: 5vw;    /* مسافة من يمين الصفحة */
-    width: 10vw;   /* عرض نسبي */
-    height: 5vh;   /* ارتفاع نسبي */
+    top: 5vh;      /* المسافة من أعلى الصفحة */
+    right: 5vw;    /* المسافة من يمين الصفحة */
+    width: 10vw;   /* عرض الزرار */
+    height: 5vh;   /* ارتفاع الزرار */
     font-size: 1.5vw;
-    background-color: #ff69b4;
+    background-color: #ff69b4; /* لون الزر الافتراضي */
     border: none;
     border-radius: 12px;
     color: white;
@@ -83,7 +80,7 @@ const numberOfHearts = 20;
 const heartChar = "♥️";
 const heartContainer = document.getElementById("hearts");
 
-// نستخدم نسب مئوية للشاشه بحيث تكون القلوب موزعة بشكل ثابت ومتناسق
+// إحداثيات ثابتة للقلب [x%, y%]
 const heartPositions = [
     [5,10],[15,15],[25,5],[35,12],[45,8],
     [55,18],[65,10],[75,20],[85,12],[95,15],
@@ -94,26 +91,30 @@ const heartPositions = [
 heartPositions.forEach(pos => {
     const h = document.createElement("div");
     h.className = "heart";
-    h.style.left = pos[0] + "vw";  // نسبة من عرض الشاشة
-    h.style.top  = pos[1] + "vh";  // نسبة من ارتفاع الشاشة
+    h.style.left = pos[0] + "vw";
+    h.style.top  = pos[1] + "vh";
     h.innerHTML = heartChar;
     heartContainer.appendChild(h);
 });
 
-// الزرار لتغيير اللون
+// الزرار لتغيير اللون والتبديل بين ألوان الخلفية
 let isOriginal = true;
-const originalBg = "#8B0000"; 
+const originalBg = "#8B0000"; // أحمر
 const originalHeartColor = "red"; 
-const newBg = "#FF69B4";   
+const newBg = "#FF69B4";       // بينك
 const newHeartColor = "red";
 
-document.getElementById("colorBtn").addEventListener("click", function(){
+const colorBtn = document.getElementById("colorBtn");
+
+colorBtn.addEventListener("click", function(){
     if(isOriginal){
         document.body.style.backgroundColor = newBg;
         document.querySelectorAll(".heart").forEach(h => h.style.color = newHeartColor);
+        colorBtn.style.backgroundColor = originalBg; // الزرار يتحول للأحمر
     } else {
         document.body.style.backgroundColor = originalBg;
         document.querySelectorAll(".heart").forEach(h => h.style.color = originalHeartColor);
+        colorBtn.style.backgroundColor = newBg;      // الزرار يتحول للبنفسجي/بينك
     }
     isOriginal = !isOriginal;
 });
