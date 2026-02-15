@@ -2,40 +2,89 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>صفحة التجربة</title>
+<title>صفحة بالقلوب والمستطيل</title>
 <style>
-body{
-    margin:0;
-    height:1300px; /* طول الخلفية */
-    display:flex;
-    justify-content:center; /* المستطيل في النص أفقياً */
-    background-color:#8B0000; /* أحمر غامق */
+body {
+    margin: 0;
+    min-height: 800px; /* طول الخلفية */
+    position: relative;
+    background-color: #8B0000; /* أحمر غامق */
     font-family: Arial, sans-serif;
 }
 
+/* القلوب الثابتة */
+.heart {
+    position: absolute;
+    width: 20px;  /* 👈 حجم القلب */
+    height: 20px;
+    color: red;   /* 👈 لون القلب */
+    font-size: 20px; /* 👈 حجم الخط للقلب */
+}
+
 /* المستطيل */
-.text-box{
-    width:75%;          /* تقريباً تلت تربع الخلفية */
-    min-height:3000px;   /* ارتفاع تلقائي حسب الكلام */
-    margin-top:500px;    /* يبدأ بعد 40px من أعلى الخلفية */
-    background: rgba(255,255,255,0.2); /* أبيض شبه شفاف */
-    backdrop-filter: blur(10px);       /* تأثير زجاجي */
-    border-radius:40px;  /* حواف دائرية */
-    padding:40px;
-    color:white;        /* لون الخط */
-    font-size:65px;     /* حجم الخط */
-    text-align:center;  
-    line-height:1.8;
+.text-box {
+    width: 60%;           /* 👈 عرض المستطيل */
+    min-height: 200px;    /* أقل ارتفاع */
+    margin: 40px auto;    /* 👈 مسافة فوق وتحت */
+    background: rgba(255,255,255,0.2); /* شبه شفاف */
+    border-radius: 40px;  /* حواف دائرية */
+    padding: 40px;
+    color: white;
+    font-size: 40px;      /* 👈 حجم النص داخل المستطيل */
+    text-align: center;
+    line-height: 1.8;
+    display: block;
+}
+
+/* زرار تغيير اللون */
+.color-button {
+    position: absolute;
+    top: 20px;           /* 👈 المسافة من الأعلى */
+    right: 20px;         /* 👈 المسافة من اليمين */
+    width: 120px;        /* 👈 عرض الزرار */
+    height: 50px;        /* 👈 ارتفاع الزرار */
+    font-size: 18px;     /* 👈 حجم خط الزرار */
+    background-color: #ff69b4; /* اللون الافتراضي للزرار */
+    border: none;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
 }
 </style>
 </head>
 
 <body>
 
+<!-- زرار تغيير الخلفية -->
+<button class="color-button" id="colorBtn">لون الخلفية</button>
+
+<!-- المستطيل -->
 <div class="text-box">
-اكتبي هنا كلامك ✨  
-المستطيل هيتوسع تلقائي حسب طول النص 💌❤️
+اكتبي هنا أي نص 💌  
+يمكنك التحكم في حجمه ومسافة المستطيل من فوق وتحت
 </div>
+
+<script>
+// 👇 إعداد القلوب
+const numberOfHearts = 30;  // 👈 عدد القلوب
+const heartSize = 20;       // 👈 حجم كل قلب
+for(let i=0;i<numberOfHearts;i++){
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.style.fontSize = heartSize + "px"; 
+    h.style.left = Math.random() * window.innerWidth + "px";
+    h.style.top = Math.random() * window.innerHeight + "px";
+    h.innerHTML = "❤️";
+    document.body.appendChild(h);
+}
+
+// 👇 تغيير لون الخلفية والقلوب للون بينك عند الضغط على الزرار
+document.getElementById("colorBtn").addEventListener("click", function(){
+    document.body.style.backgroundColor = "#FF69B4"; // بينك
+    const hearts = document.querySelectorAll(".heart");
+    hearts.forEach(h => h.style.color = "red"); // القلوب تبقى حمراء
+});
+</script>
 
 </body>
 </html>
