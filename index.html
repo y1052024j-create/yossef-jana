@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>صفحة بالقلوب والمستطيل والزرار مع شرح الوظائف</title>
+<title>صفحة بالقلوب العشوائية</title>
 <style>
 /* ==========================
    إعدادات عامة للصفحة
@@ -65,7 +65,7 @@ body {
     width: 10vw;      /* عرض الزرار */
     height: 5vh;      /* ارتفاع الزرار */
     font-size: 1.5vw; /* حجم الخط داخل الزرار */
-    background-color: #ff69b4; /* اللون الافتراضي للزرار */
+    background-color: #ff69b4;
     border: none;
     border-radius: 12px;
     color: white;
@@ -102,11 +102,11 @@ body {
 // ===== المتغيرات ========
 // ==========================
 
-// --- الخلفية ---
-let backgroundColor1 = "#8B0000";  // اللون الأحمر الغامق الافتراضي
-let backgroundColor2 = "#FF69B4";  // اللون البينك عند التبديل
+// الخلفية
+let backgroundColor1 = "#8B0000";  // الأحمر الغامق
+let backgroundColor2 = "#FF69B4";  // بينك
 
-// --- المستطيل ---
+// المستطيل
 let rectWidth = 60;       // عرض المستطيل بالنسبة للعرض الكلي للشاشة (%)
 let rectMinHeight = 20;   // أقل ارتفاع للمستطيل (% من vh)
 let rectPaddingH = 2;     // padding أفقي (% من vw)
@@ -115,7 +115,7 @@ let rectFontSize = 3;     // حجم النص داخل المستطيل (% من v
 let rectTopMargin = 15;   // المسافة من أعلى الصفحة (vh)
 let rectBottomMargin = 15;// المسافة من أسفل الصفحة (vh)
 
-// --- الزرار ---
+// الزرار
 let buttonWidth = 10;     // عرض الزرار (% من vw)
 let buttonHeight = 5;     // ارتفاع الزرار (% من vh)
 let buttonTop = 5;        // المسافة من أعلى الصفحة (vh)
@@ -124,15 +124,11 @@ let buttonFontSize = 1.5; // حجم الخط داخل الزرار (% من vw)
 let buttonColor1 = "#ff69b4"; // لون الزرار الافتراضي
 let buttonColor2 = "#ff0000"; // لون الزرار عند تبديل الخلفية
 
-// --- القلوب ---
-let numberOfHearts = 20; // عدد القلوب الكلي (يمكن زيادة أو تقليل)
-let heartSize = 3;       // حجم القلب بالنسبة للعرض (% من vw)
-let heartColor1 = "red"; // لون القلب الأصلي
-let heartColor2 = "red"; // لون القلب عند تبديل الخلفية
-
-// المسافة بين القلوب لتوزيعها على الصفحة
-let spacingX = 8;  // المسافة الأفقية بين القلوب (%)
-let spacingY = 8;  // المسافة العمودية بين القلوب (%)
+// القلوب
+let numberOfHearts = 25; // عدد القلوب
+let heartSize = 250;     // حجم القلب (px)
+let heartColor1 = "red"; // اللون الافتراضي للقلب
+let heartColor2 = "red"; // اللون عند تبديل الخلفية
 
 // ==========================
 // ===== إعداد المستطيل =====
@@ -156,25 +152,19 @@ colorBtn.style.fontSize = buttonFontSize + "vw";
 colorBtn.style.backgroundColor = buttonColor1;
 
 // ==========================
-// ===== إنشاء القلوب =====
+// ===== إنشاء القلوب العشوائية =====
 // ==========================
 const heartContainer = document.getElementById("hearts");
 
-// حساب عدد القلوب أفقياً وعمودياً لتغطية الصفحة
-const cols = Math.floor(100 / spacingX);
-const rows = Math.floor(100 / spacingY);
-
-for(let r = 0; r <= rows; r++){
-    for(let c = 0; c <= cols; c++){
-        const h = document.createElement("div");
-        h.className = "heart";
-        h.style.fontSize = heartSize + "vw";
-        h.style.left = (c * spacingX) + "vw";
-        h.style.top  = (r * spacingY) + "vh";
-        h.style.color = heartColor1;
-        h.innerHTML = "♥️";
-        heartContainer.appendChild(h);
-    }
+for(let i = 0; i < numberOfHearts; i++){
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.style.fontSize = heartSize + "px"; // حجم القلب
+    h.style.left = Math.random() * (window.innerWidth - heartSize) + "px"; // موقع عشوائي أفقي
+    h.style.top  = Math.random() * (window.innerHeight - heartSize) + "px"; // موقع عشوائي عمودي
+    h.style.color = heartColor1; 
+    h.innerHTML = "♥️";
+    heartContainer.appendChild(h);
 }
 
 // ==========================
