@@ -4,76 +4,68 @@
 <meta charset="UTF-8">
 <title>صفحة بالقلوب والمستطيل والزرار</title>
 <style>
-/* --- إعدادات الخلفية --- */
 body {
     margin: 0;
-    min-height: 800px; /* طول الخلفية */
+    min-height: 800px;
     position: relative;
-    background-color: #8B0000; /* اللون الافتراضي */
+    background-color: #8B0000;
     font-family: Arial, sans-serif;
-    overflow: hidden; /* عشان القلوب متطلعش بره الصفحة */
+    overflow: hidden;
 }
 
-/* --- حاوية القلوب خلف كل العناصر --- */
 .heart-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; /* 👈 تحت كل العناصر */
+    z-index: 0;
 }
 
-/* --- القلوب --- */
 .heart {
     position: absolute;
-    color: red; /* اللون الافتراضي */
+    color: red;
     user-select: none;
-    font-size: 300px; /* حجم القلب */
+    font-size: 300px;
 }
 
-/* --- المستطيل --- */
 .text-box {
-    width: 85%;           /* عرض المستطيل */
-    min-height: 200px;    /* أقل ارتفاع */
-    margin: 300px auto 400px auto; /* المسافة من فوق وتحت */
-    background: rgba(255,255,255,0.2); /* شبه شفاف */
+    width: 85%;
+    min-height: 200px;
+    margin: 300px auto 400px auto;
+    background: rgba(255,255,255,0.2);
     backdrop-filter: blur(10px);
-    border-radius: 40px;  /* حواف دائرية */
+    border-radius: 40px;
     padding: 40px;
     color: white;
-    font-size: 50px;      /* حجم النص داخل المستطيل */
+    font-size: 50px;
     text-align: center;
     line-height: 1.8;
     display: block;
     position: relative;
-    z-index: 1; /* 👈 فوق القلوب */
+    z-index: 1;
 }
 
-/* --- زرار تغيير الخلفية فوق المستطيل --- */
 .color-button {
     position: absolute;
-    top: -60px;       /* فوق المستطيل */
-    right: 0;         /* المسافة من اليمين */
-    width: 160px;     /* عرض الزرار */
-    height: 80px;     /* ارتفاع الزرار */
-    font-size: 25px;  /* حجم الخط */
-    background-color: #ff69b4; /* اللون الافتراضي للزرار */
+    top: -60px;
+    right: 0;
+    width: 160px;
+    height: 80px;
+    font-size: 25px;
+    background-color: #ff69b4;
     border: none;
     border-radius: 12px;
     color: white;
     cursor: pointer;
-    z-index: 1;       /* فوق القلوب */
+    z-index: 1;
 }
 </style>
 </head>
-
 <body>
 
-<!-- حاوية القلوب -->
 <div class="heart-container" id="hearts"></div>
 
-<!-- المستطيل -->
 <div class="text-box">
     <button class="color-button" id="colorBtn">تغيير اللون</button>
     اكتبي هنا أي نص 💌  
@@ -81,24 +73,47 @@ body {
 </div>
 
 <script>
-// --- إعداد القلوب ---
-const numberOfHearts = 20;  // عدد القلوب
-const heartSize = 200;       // حجم القلوب
-const heartChar = "♥️";     // شكل القلب
-
+// إعداد القلوب بحيث متدخلش ف بعض وتبقى ثابتة
+const numberOfHearts = 20;
+const heartSize = 200;
+const heartChar = "♥️";
 const heartContainer = document.getElementById("hearts");
 
-for(let i=0; i<numberOfHearts; i++){
-    const h = document.createElement("div");
-    h.className = "heart";
-    h.style.fontSize = heartSize + "px"; 
-    h.style.left = Math.random() * (window.innerWidth - heartSize) + "px";
-    h.style.top = Math.random() * (window.innerHeight - heartSize) + "px";
-    h.innerHTML = heartChar;
-    heartContainer.appendChild(h); // 👈 القلوب جوه الحاوية
+// مصفوفة لتخزين إحداثيات القلوب
+const positions = [];
+
+// دالة للتحقق من المسافة بين القلوب
+function isFarEnough(x, y, minDist = heartSize) {
+    for (let pos of positions) {
+        let dx = pos.x - x;
+        let dy = pos.y - y;
+        let dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < minDist) return false;
+    }
+    return true;
 }
 
-// --- إعداد الزرار لتغيير الألوان ---
+for(let i=0; i<numberOfHearts; i++){
+    let x, y;
+    let attempts = 0;
+    do {
+        x = Math.random() * (window.innerWidth - heartSize);
+        y = Math.random() * (window.innerHeight - heartSize);
+        attempts++;
+    } while(!isFarEnough(x, y) && attempts < 100);
+
+    positions.push({x,y});
+
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.style.fontSize = heartSize + "px";
+    h.style.left = x + "px";
+    h.style.top = y + "px";
+    h.innerHTML = heartChar;
+    heartContainer.appendChild(h);
+}
+
+// الزرار لتغيير اللون
 let isOriginal = true;
 const originalBg = "#8B0000"; 
 const originalHeartColor = "red"; 
