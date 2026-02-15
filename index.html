@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>صفحة بالقلوب العشوائية</title>
+<title>صفحة بالقلوب الثابتة</title>
 <style>
 /* ==========================
    إعدادات عامة للصفحة
@@ -11,7 +11,7 @@ body {
     margin: 0;
     position: relative;
     font-family: Arial, sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;  /* منع ظهور Scroll أفقي */
     background-color: #8B0000; /* اللون الافتراضي للخلفية */
 }
 
@@ -23,36 +23,37 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100%; /* تغطي طول الصفحة مهما طال النص */
     z-index: 0; /* 👈 تجعل القلوب خلف كل العناصر */
+    pointer-events: none; /* منع التفاعل مع القلوب */
 }
 
 /* ==========================
    القلوب
    ========================== */
 .heart {
-    position: absolute; /* تمكين وضعها في أي مكان بالشاشة */
-    color: red;         /* اللون الافتراضي للقلب */
-    user-select: none;  /* منع تحديد النص بالماوس */
+    position: absolute;
+    color: red;
+    user-select: none;
 }
 
 /* ==========================
    المستطيل
    ========================== */
 .text-box {
-    background: rgba(255,255,255,0.2); /* خلفية شبه شفافة */
-    backdrop-filter: blur(10px);        /* تأثير ضبابي */
-    border-radius: 40px;                /* حواف دائرية */
-    color: white;                       /* لون النص */
-    text-align: center;                 /* محاذاة النص للنص الوسط */
-    line-height: 1.8;                   /* المسافة بين الأسطر */
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 40px;
+    color: white;
+    text-align: center;
+    line-height: 1.8;
     position: relative;
-    z-index: 1;                         /* فوق القلوب */
-    width: 60%;                          /* عرض المستطيل (يمكن تغييره) */
-    min-height: 20vh;                    /* أقل ارتفاع للمستطيل */
-    margin: 15vh auto;                   /* المسافة من أعلى وأسفل الصفحة */
-    padding: 2vh 2vw;                    /* المسافة الداخلية داخل المستطيل */
-    font-size: 3vw;                      /* حجم النص داخل المستطيل */
+    z-index: 1;
+    width: 60%;
+    min-height: 20vh;
+    margin: 15vh auto 15vh auto;
+    padding: 2vh 2vw;
+    font-size: 3vw;
 }
 
 /* ==========================
@@ -60,46 +61,37 @@ body {
    ========================== */
 .color-button {
     position: absolute;
-    top: 5vh;         /* المسافة من أعلى الصفحة */
-    right: 5vw;       /* المسافة من يمين الصفحة */
-    width: 10vw;      /* عرض الزرار */
-    height: 5vh;      /* ارتفاع الزرار */
-    font-size: 1.5vw; /* حجم الخط داخل الزرار */
+    top: 5vh;
+    right: 5vw;
+    width: 10vw;
+    height: 5vh;
+    font-size: 1.5vw;
     background-color: #ff69b4;
     border: none;
     border-radius: 12px;
     color: white;
     cursor: pointer;
-    z-index: 2;       /* فوق المستطيل والقلوب */
+    z-index: 2;
 }
 </style>
 </head>
 <body>
 
-<!-- ==========================
-     حاوية القلوب
-     تحتوي على جميع القلوب وتكون خلف كل العناصر
-     ========================== -->
+<!-- حاوية القلوب -->
 <div class="heart-container" id="hearts"></div>
 
-<!-- ==========================
-     المستطيل
-     يعرض النص ويتمدد حسب طول النص
-     ========================== -->
+<!-- المستطيل -->
 <div class="text-box" id="textBox">
     اكتبي هنا أي نص 💌  
     المستطيل يتمدد حسب طول النص
 </div>
 
-<!-- ==========================
-     زرار تغيير اللون
-     يقوم بتبديل لون الخلفية والقلوب والزرار نفسه
-     ========================== -->
+<!-- زرار تغيير اللون -->
 <button class="color-button" id="colorBtn">تغيير اللون</button>
 
 <script>
 // ==========================
-// ===== المتغيرات ========
+// ===== إعداد المتغيرات =====
 // ==========================
 
 // الخلفية
@@ -107,32 +99,31 @@ let backgroundColor1 = "#8B0000";  // الأحمر الغامق
 let backgroundColor2 = "#FF69B4";  // بينك
 
 // المستطيل
-let rectWidth = 60;       // عرض المستطيل بالنسبة للعرض الكلي للشاشة (%)
-let rectMinHeight = 20;   // أقل ارتفاع للمستطيل (% من vh)
-let rectPaddingH = 2;     // padding أفقي (% من vw)
-let rectPaddingV = 2;     // padding عمودي (% من vh)
-let rectFontSize = 3;     // حجم النص داخل المستطيل (% من vw)
-let rectTopMargin = 15;   // المسافة من أعلى الصفحة (vh)
-let rectBottomMargin = 15;// المسافة من أسفل الصفحة (vh)
+let rectWidth = 60;
+let rectMinHeight = 20;
+let rectPaddingH = 2;
+let rectPaddingV = 2;
+let rectFontSize = 3;
+let rectTopMargin = 15;
+let rectBottomMargin = 15;
 
 // الزرار
-let buttonWidth = 10;     // عرض الزرار (% من vw)
-let buttonHeight = 5;     // ارتفاع الزرار (% من vh)
-let buttonTop = 5;        // المسافة من أعلى الصفحة (vh)
-let buttonRight = 5;      // المسافة من يمين الصفحة (vw)
-let buttonFontSize = 1.5; // حجم الخط داخل الزرار (% من vw)
-let buttonColor1 = "#ff69b4"; // لون الزرار الافتراضي
-let buttonColor2 = "#ff0000"; // لون الزرار عند تبديل الخلفية
+let buttonWidth = 10;
+let buttonHeight = 5;
+let buttonTop = 5;
+let buttonRight = 5;
+let buttonFontSize = 1.5;
+let buttonColor1 = "#ff69b4";
+let buttonColor2 = "#ff0000";
 
 // القلوب
 let numberOfHearts = 25; // عدد القلوب
-let heartSize = 250;     // حجم القلب (px)
-let heartColor1 = "red"; // اللون الافتراضي للقلب
-let heartColor2 = "red"; // اللون عند تبديل الخلفية
+let heartSize = 250;     // حجم القلب بالبيكسل
+let heartColor1 = "red"; 
+let heartColor2 = "red";
 
 // ==========================
 // ===== إعداد المستطيل =====
-// ==========================
 const textBox = document.getElementById("textBox");
 textBox.style.width = rectWidth + "vw";
 textBox.style.minHeight = rectMinHeight + "vh";
@@ -142,7 +133,6 @@ textBox.style.margin = rectTopMargin + "vh auto " + rectBottomMargin + "vh auto"
 
 // ==========================
 // ===== إعداد الزرار =====
-// ==========================
 const colorBtn = document.getElementById("colorBtn");
 colorBtn.style.width = buttonWidth + "vw";
 colorBtn.style.height = buttonHeight + "vh";
@@ -152,30 +142,53 @@ colorBtn.style.fontSize = buttonFontSize + "vw";
 colorBtn.style.backgroundColor = buttonColor1;
 
 // ==========================
-// ===== إنشاء القلوب العشوائية =====
-// ==========================
+// ===== إنشاء القلوب العشوائية الثابتة =====
 const heartContainer = document.getElementById("hearts");
 
+// توليد أماكن عشوائية بدون تداخل
+const positions = [];
+
 for(let i = 0; i < numberOfHearts; i++){
+    let left, top;
+    let overlap;
+
+    do {
+        overlap = false;
+        left = Math.random() * (window.innerWidth - heartSize);
+        top  = Math.random() * (window.innerHeight - heartSize);
+
+        // التحقق من عدم تداخل القلب مع القلوب السابقة
+        for(let pos of positions){
+            const dx = left - pos.left;
+            const dy = top - pos.top;
+            const distance = Math.sqrt(dx*dx + dy*dy);
+            if(distance < heartSize * 0.9){ // مسافة أمان
+                overlap = true;
+                break;
+            }
+        }
+    } while(overlap);
+
+    positions.push({left, top});
+
     const h = document.createElement("div");
     h.className = "heart";
-    h.style.fontSize = heartSize + "px"; // حجم القلب
-    h.style.left = Math.random() * (window.innerWidth - heartSize) + "px"; // موقع عشوائي أفقي
-    h.style.top  = Math.random() * (window.innerHeight - heartSize) + "px"; // موقع عشوائي عمودي
-    h.style.color = heartColor1; 
+    h.style.fontSize = heartSize + "px";
+    h.style.left = left + "px";
+    h.style.top  = top + "px";
+    h.style.color = heartColor1;
     h.innerHTML = "♥️";
     heartContainer.appendChild(h);
 }
 
 // ==========================
 // ===== زرار تغيير اللون =====
-// ==========================
 let isOriginal = true;
 colorBtn.addEventListener("click", function(){
     if(isOriginal){
-        document.body.style.backgroundColor = backgroundColor2;      // تغيير الخلفية
-        document.querySelectorAll(".heart").forEach(h => h.style.color = heartColor2); // تغيير لون القلوب
-        colorBtn.style.backgroundColor = buttonColor2; // تغيير لون الزرار
+        document.body.style.backgroundColor = backgroundColor2;
+        document.querySelectorAll(".heart").forEach(h => h.style.color = heartColor2);
+        colorBtn.style.backgroundColor = buttonColor2;
     } else {
         document.body.style.backgroundColor = backgroundColor1;
         document.querySelectorAll(".heart").forEach(h => h.style.color = heartColor1);
