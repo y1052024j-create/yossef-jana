@@ -73,45 +73,28 @@ body {
 </div>
 
 <script>
-// إعداد القلوب بحيث متدخلش ف بعض وتبقى ثابتة
-const numberOfHearts = 20;
+// إعداد القلوب الثابتة
 const heartSize = 200;
 const heartChar = "♥️";
 const heartContainer = document.getElementById("hearts");
 
-// مصفوفة لتخزين إحداثيات القلوب
-const positions = [];
+// إحداثيات ثابتة للقلب [x, y] بالبيكسل
+const heartPositions = [
+  [50, 100], [300, 150], [600, 200], [900, 250], [1200, 180],
+  [200, 400], [500, 350], [800, 420], [1100, 380], [1400, 400],
+  [100, 600], [400, 550], [700, 620], [1000, 580], [1300, 600],
+  [250, 750], [550, 700], [850, 780], [1150, 730], [1450, 750]
+];
 
-// دالة للتحقق من المسافة بين القلوب
-function isFarEnough(x, y, minDist = heartSize) {
-    for (let pos of positions) {
-        let dx = pos.x - x;
-        let dy = pos.y - y;
-        let dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < minDist) return false;
-    }
-    return true;
-}
-
-for(let i=0; i<numberOfHearts; i++){
-    let x, y;
-    let attempts = 0;
-    do {
-        x = Math.random() * (window.innerWidth - heartSize);
-        y = Math.random() * (window.innerHeight - heartSize);
-        attempts++;
-    } while(!isFarEnough(x, y) && attempts < 100);
-
-    positions.push({x,y});
-
+heartPositions.forEach(pos => {
     const h = document.createElement("div");
     h.className = "heart";
     h.style.fontSize = heartSize + "px";
-    h.style.left = x + "px";
-    h.style.top = y + "px";
+    h.style.left = pos[0] + "px";
+    h.style.top = pos[1] + "px";
     h.innerHTML = heartChar;
     heartContainer.appendChild(h);
-}
+});
 
 // الزرار لتغيير اللون
 let isOriginal = true;
