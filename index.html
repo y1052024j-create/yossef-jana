@@ -2,200 +2,125 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>صفحة بالقلوب الثابتة</title>
+<title>صفحة بمستطيل وزرار ألوان</title>
 <style>
 /* ==========================
-   إعدادات عامة للصفحة
+   إعدادات الصفحة
    ========================== */
 body {
     margin: 0;
     position: relative;
     font-family: Arial, sans-serif;
-    overflow-x: hidden;  /* منع ظهور Scroll أفقي */
-    background-color: #8B0000; /* اللون الافتراضي للخلفية */
-}
-
-/* ==========================
-   حاوية القلوب
-   ========================== */
-.heart-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-height: 100%; /* تغطي طول الصفحة مهما طال النص */
-    z-index: 0; /* 👈 تجعل القلوب خلف كل العناصر */
-    pointer-events: none; /* منع التفاعل مع القلوب */
-}
-
-/* ==========================
-   القلوب
-   ========================== */
-.heart {
-    position: absolute;
-    color: red;
-    user-select: none;
+    overflow-x: hidden;   /* منع ظهور Scroll أفقي */
+    background-color: #8B0000; /* الخلفية الافتراضية أحمر غامق */
+    min-height: 100vh;    /* طول الصفحة ثابت */
 }
 
 /* ==========================
    المستطيل
    ========================== */
 .text-box {
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
-    border-radius: 40px;
+    position: relative;
+    width: 50%;             /* عرض المستطيل (قابل للتعديل) */
+    min-height: 30vh;       /* ارتفاع المستطيل (قابل للتعديل) */
+    margin: 10vh auto;      /* المسافة من أعلى وأسفل الصفحة */
+    background: rgba(255,255,255,0.2); /* خلفية شبه شفافة */
+    border-radius: 40px;    /* حواف دائرية */
+    box-shadow: 0 0 40px rgba(0,0,0,0.3); /* الظل خلف المستطيل */
+    padding: 2vh 2vw;       /* المسافة الداخلية داخل المستطيل */
+    font-size: 2vw;         /* حجم النص داخل المستطيل */
     color: white;
     text-align: center;
-    line-height: 1.8;
-    position: relative;
-    z-index: 1;
-    width: 60%;
-    min-height: 20vh;
-    margin: 15vh auto 15vh auto;
-    padding: 2vh 2vw;
-    font-size: 3vw;
 }
 
 /* ==========================
    زرار تغيير اللون
    ========================== */
-.color-button {
+.color-switch {
     position: absolute;
-    top: 5vh;
-    right: 5vw;
-    width: 10vw;
-    height: 5vh;
-    font-size: 1.5vw;
-    background-color: #ff69b4;
-    border: none;
-    border-radius: 12px;
-    color: white;
+    top: 5vh;      /* المسافة من أعلى الصفحة */
+    right: 5vw;    /* المسافة من اليمين */
+    width: 60px;   /* عرض الشريط */
+    height: 30px;  /* ارتفاع الشريط */
+    background: linear-gradient(to right, #ff69b4, #ff0000); /* لونين دائرتين */
+    border-radius: 20px;
     cursor: pointer;
-    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* يبدأ الدائرة من اليسار */
 }
+
+/* الدائرة المتحركة داخل الزرار */
+.switch-circle {
+    width: 28px;
+    height: 28px;
+    background-color: white;
+    border-radius: 50%;
+    margin: 1px;
+    transition: 0.3s; /* حركة سلسة */
+}
+
+/* ==========================
+   الوظائف بالعربي داخل الكود:
+   - body: الخلفية العامة للصفحة
+   - .text-box: المستطيل الرئيسي مع الظل، حجم وقيمة قابلة للتعديل
+   - .color-switch: زرار تغيير اللون مع لونين دائرتين
+   - .switch-circle: الدائرة المتحركة لتحديد اللون الحالي
+   - min-height: طول الخلفية ثابت حتى مع الريفريش
+   ========================== */
 </style>
 </head>
 <body>
 
-<!-- حاوية القلوب -->
-<div class="heart-container" id="hearts"></div>
-
 <!-- المستطيل -->
-<div class="text-box" id="textBox">
+<div class="text-box">
     اكتبي هنا أي نص 💌  
-    المستطيل يتمدد حسب طول النص
 </div>
 
 <!-- زرار تغيير اللون -->
-<button class="color-button" id="colorBtn">تغيير اللون</button>
+<div class="color-switch" id="colorSwitch">
+    <div class="switch-circle" id="switchCircle"></div>
+</div>
 
 <script>
 // ==========================
 // ===== إعداد المتغيرات =====
 // ==========================
+const body = document.body;
+const switchCircle = document.getElementById("switchCircle");
+const colorSwitch = document.getElementById("colorSwitch");
 
-// الخلفية
-let backgroundColor1 = "#8B0000";  // الأحمر الغامق
-let backgroundColor2 = "#FF69B4";  // بينك
-
-// المستطيل
-let rectWidth = 60;
-let rectMinHeight = 20;
-let rectPaddingH = 2;
-let rectPaddingV = 2;
-let rectFontSize = 3;
-let rectTopMargin = 15;
-let rectBottomMargin = 15;
-
-// الزرار
-let buttonWidth = 10;
-let buttonHeight = 5;
-let buttonTop = 5;
-let buttonRight = 5;
-let buttonFontSize = 1.5;
-let buttonColor1 = "#ff69b4";
-let buttonColor2 = "#ff0000";
-
-// القلوب
-let numberOfHearts = 25; // عدد القلوب
-let heartSize = 250;     // حجم القلب بالبيكسل
-let heartColor1 = "red"; 
-let heartColor2 = "red";
+// ألوان الخلفية
+const colorLeft = "#ff69b4"; // اللون الأول للبينك
+const colorRight = "#ff0000"; // اللون الثاني للأحمر
+let isLeft = true; // متغير لتحديد أي لون مفعل
 
 // ==========================
-// ===== إعداد المستطيل =====
-const textBox = document.getElementById("textBox");
-textBox.style.width = rectWidth + "vw";
-textBox.style.minHeight = rectMinHeight + "vh";
-textBox.style.padding = rectPaddingV + "vh " + rectPaddingH + "vw";
-textBox.style.fontSize = rectFontSize + "vw";
-textBox.style.margin = rectTopMargin + "vh auto " + rectBottomMargin + "vh auto";
-
+// ===== عند الضغط على زرار التغيير =====
 // ==========================
-// ===== إعداد الزرار =====
-const colorBtn = document.getElementById("colorBtn");
-colorBtn.style.width = buttonWidth + "vw";
-colorBtn.style.height = buttonHeight + "vh";
-colorBtn.style.top = buttonTop + "vh";
-colorBtn.style.right = buttonRight + "vw";
-colorBtn.style.fontSize = buttonFontSize + "vw";
-colorBtn.style.backgroundColor = buttonColor1;
-
-// ==========================
-// ===== إنشاء القلوب العشوائية الثابتة =====
-const heartContainer = document.getElementById("hearts");
-
-// توليد أماكن عشوائية بدون تداخل
-const positions = [];
-
-for(let i = 0; i < numberOfHearts; i++){
-    let left, top;
-    let overlap;
-
-    do {
-        overlap = false;
-        left = Math.random() * (window.innerWidth - heartSize);
-        top  = Math.random() * (window.innerHeight - heartSize);
-
-        // التحقق من عدم تداخل القلب مع القلوب السابقة
-        for(let pos of positions){
-            const dx = left - pos.left;
-            const dy = top - pos.top;
-            const distance = Math.sqrt(dx*dx + dy*dy);
-            if(distance < heartSize * 0.9){ // مسافة أمان
-                overlap = true;
-                break;
-            }
-        }
-    } while(overlap);
-
-    positions.push({left, top});
-
-    const h = document.createElement("div");
-    h.className = "heart";
-    h.style.fontSize = heartSize + "px";
-    h.style.left = left + "px";
-    h.style.top  = top + "px";
-    h.style.color = heartColor1;
-    h.innerHTML = "♥️";
-    heartContainer.appendChild(h);
-}
-
-// ==========================
-// ===== زرار تغيير اللون =====
-let isOriginal = true;
-colorBtn.addEventListener("click", function(){
-    if(isOriginal){
-        document.body.style.backgroundColor = backgroundColor2;
-        document.querySelectorAll(".heart").forEach(h => h.style.color = heartColor2);
-        colorBtn.style.backgroundColor = buttonColor2;
+colorSwitch.addEventListener("click", () => {
+    if(isLeft){
+        body.style.backgroundColor = colorRight; // تغيير الخلفية للأحمر
+        switchCircle.style.marginLeft = "31px";  // تحريك الدائرة للجهة اليمنى
     } else {
-        document.body.style.backgroundColor = backgroundColor1;
-        document.querySelectorAll(".heart").forEach(h => h.style.color = heartColor1);
-        colorBtn.style.backgroundColor = buttonColor1;
+        body.style.backgroundColor = colorLeft;  // تغيير الخلفية للبينك
+        switchCircle.style.marginLeft = "1px";   // إعادة الدائرة لليسار
     }
-    isOriginal = !isOriginal;
+    isLeft = !isLeft; // تبديل الحالة
 });
+
+// ==========================
+// ===== الوظائف بالعربي =====
+// ==========================
+// body.style.backgroundColor => يتحكم في لون الخلفية
+// .text-box.width & .text-box.minHeight => تتحكم في حجم المستطيل
+// .text-box.margin => تتحكم في المسافة من أعلى وأسفل الصفحة
+// .text-box.border-radius => التحكم بحواف المستطيل
+// .text-box.box-shadow => الظل خلف المستطيل
+// .color-switch.width & height => حجم شريط التغيير
+// .color-switch.background => الألوان في الشريط
+// .switch-circle.width & height => حجم الدائرة المتحركة
+// .switch-circle.marginLeft => تحريك الدائرة لتحديد اللون الحالي
 </script>
 
 </body>
