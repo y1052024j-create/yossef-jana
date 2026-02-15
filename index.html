@@ -2,17 +2,18 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>صفحة بالقلوب والمستطيل والزرار</title>
+<title>صفحة بالقلوب والمستطيل والزرار Responsive</title>
 <style>
 body {
     margin: 0;
-    min-height: 800px;
+    min-height: 100vh;
     position: relative;
     background-color: #8B0000;
     font-family: Arial, sans-serif;
     overflow: hidden;
 }
 
+/* حاوية القلوب خلف كل العناصر */
 .heart-container {
     position: absolute;
     top: 0;
@@ -22,23 +23,25 @@ body {
     z-index: 0;
 }
 
+/* القلوب */
 .heart {
     position: absolute;
     color: red;
     user-select: none;
-    font-size: 300px;
+    font-size: 5vw; /* حجم متغير حسب عرض الشاشة */
 }
 
+/* المستطيل */
 .text-box {
-    width: 85%;
-    min-height: 200px;
-    margin: 300px auto 400px auto;
+    width: 60%;             /* عرض نسبي */
+    min-height: 20vh;       /* أقل ارتفاع نسبي */
+    margin: 10vh auto;      /* مسافة من فوق وتحت نسبي */
     background: rgba(255,255,255,0.2);
     backdrop-filter: blur(10px);
     border-radius: 40px;
-    padding: 40px;
+    padding: 2vh 2vw;
     color: white;
-    font-size: 50px;
+    font-size: 3vw;         /* حجم نص نسبي */
     text-align: center;
     line-height: 1.8;
     display: block;
@@ -46,19 +49,20 @@ body {
     z-index: 1;
 }
 
+/* زرار تغيير اللون */
 .color-button {
     position: absolute;
-    top: -60px;
-    right: 0;
-    width: 160px;
-    height: 80px;
-    font-size: 25px;
+    top: 5vh;      /* مسافة من أعلى الصفحة */
+    right: 5vw;    /* مسافة من يمين الصفحة */
+    width: 10vw;   /* عرض نسبي */
+    height: 5vh;   /* ارتفاع نسبي */
+    font-size: 1.5vw;
     background-color: #ff69b4;
     border: none;
     border-radius: 12px;
     color: white;
     cursor: pointer;
-    z-index: 1;
+    z-index: 2;
 }
 </style>
 </head>
@@ -67,31 +71,31 @@ body {
 <div class="heart-container" id="hearts"></div>
 
 <div class="text-box">
-    <button class="color-button" id="colorBtn">تغيير اللون</button>
     اكتبي هنا أي نص 💌  
     المستطيل يتمدد حسب طول النص
 </div>
 
+<button class="color-button" id="colorBtn">تغيير اللون</button>
+
 <script>
-// إعداد القلوب الثابتة
-const heartSize = 200;
+// إعداد القلوب
+const numberOfHearts = 20;
 const heartChar = "♥️";
 const heartContainer = document.getElementById("hearts");
 
-// إحداثيات ثابتة للقلب [x, y] بالبيكسل
+// نستخدم نسب مئوية للشاشه بحيث تكون القلوب موزعة بشكل ثابت ومتناسق
 const heartPositions = [
-  [50, 100], [300, 150], [600, 200], [900, 250], [1200, 180],
-  [200, 400], [500, 350], [800, 420], [1100, 380], [1400, 400],
-  [100, 600], [400, 550], [700, 620], [1000, 580], [1300, 600],
-  [250, 750], [550, 700], [850, 780], [1150, 730], [1450, 750]
+    [5,10],[15,15],[25,5],[35,12],[45,8],
+    [55,18],[65,10],[75,20],[85,12],[95,15],
+    [10,40],[20,45],[30,38],[40,42],[50,35],
+    [60,50],[70,45],[80,40],[90,50],[95,45]
 ];
 
 heartPositions.forEach(pos => {
     const h = document.createElement("div");
     h.className = "heart";
-    h.style.fontSize = heartSize + "px";
-    h.style.left = pos[0] + "px";
-    h.style.top = pos[1] + "px";
+    h.style.left = pos[0] + "vw";  // نسبة من عرض الشاشة
+    h.style.top  = pos[1] + "vh";  // نسبة من ارتفاع الشاشة
     h.innerHTML = heartChar;
     heartContainer.appendChild(h);
 });
