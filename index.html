@@ -55,32 +55,34 @@ body {
   width: 300px;
   height: 300px;
   fill: red;
+  max-width: 90vw; /* القلب لا يخرج من شاشة الهاتف */
 }
 @keyframes heartbeat {
   0%,100% {transform: scale(1);}
   50% {transform: scale(1.05);}
 }
 
-/* ===== العداد ===== */
+/* ===== العداد بالعرض داخل القلب ===== */
 .timer-overlay {
   position: absolute;
   top:50%;
   left:50%;
   transform: translate(-50%, -50%);
   display:flex;
-  gap: 12px;
-  flex-wrap: wrap;
+  flex-direction: row; /* بالعرض */
+  flex-wrap: nowrap;
   justify-content:center;
   align-items:center;
-  z-index:15;
-  /* يتحرك مع القلب */
+  gap: 8px;
+  max-width: 80%; /* لا يتجاوز عرض القلب */
+  text-align: center;
 }
-.timer-unit {display:flex; flex-direction:column; align-items:center;}
+.timer-unit {display:flex; flex-direction:column; align-items:center; min-width: 40px;}
 .timer-value {color:#fff; font-weight:700; font-size:1rem; white-space:nowrap;}
 .timer-label {color: rgba(255,255,255,0.8); font-size:10px;}
 
 /* ===== النصوص فوق القلب ===== */
-.names {text-align:center; margin-bottom:20px; z-index:15;}
+.names {text-align:center; margin-bottom:15px; z-index:15;}
 .names h1 {font-family:'Dancing Script', cursive; color:#fff; font-size:2rem;}
 .names p {font-family:'Dancing Script', cursive; color:rgba(255,255,255,0.8); font-size:1.4rem; margin-top:5px;}
 
@@ -141,7 +143,7 @@ body {
     <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/>
   </svg>
 
-  <!-- العداد داخل القلب -->
+  <!-- العداد داخل القلب بالعرض -->
   <div class="timer-overlay">
     <div class="timer" id="timer"></div>
   </div>
