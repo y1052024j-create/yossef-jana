@@ -1,141 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-<meta charset="UTF-8">
-<title>صفحة بمستطيل وزرار ألوان</title>
-<style>
-/* ==========================
-   إعدادات الصفحة
-   ========================== */
-body {
-    margin: 0;
-    position: relative;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;   /* منع ظهور Scroll أفقي */
-    background-color: #8B0000; /* الخلفية الافتراضية أحمر غامق */
-    min-height: 500vh;    /* طول الصفحة ثابت */
-}
-
-/* ==========================
-   المستطيل
-   ========================== */
-.text-box {
-    position: relative;
-    width: 80%;             /* عرض المستطيل (قابل للتعديل) */
-    min-height: 470vh;       /* ارتفاع المستطيل (قابل للتعديل) */
-    margin: 13vh auto;      /* المسافة من أعلى وأسفل الصفحة */
-    background: rgba(255,255,255,0.2); /* خلفية شبه شفافة */
-    border-radius: 40px;    /* حواف دائرية */
-    box-shadow: 0 0 40px rgba(0,0,0,0.3); /* الظل خلف المستطيل */
-    padding: 2vh 2vw;       /* المسافة الداخلية داخل المستطيل */
-    font-size: 8vw;         /* حجم النص داخل المستطيل */
-    color: white;
-    text-align: center;
-}
-
-/* ==========================
-   نص فوق المستطيل
-   ========================== */
-.text-top {
-    position: relative;
-    width: 100%;
-    text-align: center;
-    font-size: 10vw;      /* حجم النص فوق المستطيل */
-    top: 230px;  /* المسافة بين النص والمستطيل */
-    color: white;
-}
-
-/* ==========================
-   نص تحت المستطيل
-   ========================== */
-.text-bottom {
-    position: relative;
-    width: 100%;
-    text-align: center;
-    font-size: 7vw;      /* حجم النص تحت المستطيل */
-    top: -230px;     /* المسافة بين المستطيل والنص */
-    color: white;
-}
-
-/* ==========================
-   زرار تغيير اللون
-   ========================== */
-.color-switch {
-    position: absolute;
-    top: 7vh;      /* المسافة من أعلى الصفحة */
-    right: 2vw;    /* المسافة من اليمين */
-    width: 100px;   /* عرض الشريط */
-    height: 60px;  /* ارتفاع الشريط */
-    background: linear-gradient(to right, #ff69b4, #ff0000); /* لونين دائرتين */
-    border-radius: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* يبدأ الدائرة من اليسار */
-}
-
-/* الدائرة المتحركة داخل الزرار */
-.switch-circle {
-    width: 28px;
-    height: 28px;
-    background-color: white;
-    border-radius: 50%;
-    margin: 1px;
-    transition: 0.3s; /* حركة سلسة */
-}
-
-/* ==========================
-   الوظائف بالعربي داخل الكود:
-   - .text-top: نص فوق المستطيل، التحكم في الحجم والمسافة من المستطيل
-   - .text-bottom: نص تحت المستطيل، التحكم في الحجم والمسافة من المستطيل
-   ========================== */
-</style>
-</head>
-<body>
-
-<!-- نص فوق المستطيل -->
-<div class="text-top">Yossef♾️Jana</div>
-
-<!-- المستطيل -->
-<div class="text-box">
-    اكتبي هنا أي نص 💌  
-</div>
-
-<!-- نص تحت المستطيل -->
-<div class="text-bottom">🌹Happy Valentine day🌹</div>
-
-<!-- زرار تغيير اللون -->
-<div class="color-switch" id="colorSwitch">
-    <div class="switch-circle" id="switchCircle"></div>
-</div>
-
-<script>
-// ==========================
-// ===== إعداد المتغيرات =====
-// ==========================
-const body = document.body;
-const switchCircle = document.getElementById("switchCircle");
-const colorSwitch = document.getElementById("colorSwitch");
-
-// ألوان الخلفية
-const colorLeft = "#FF69B4"; // اللون الأول للبينك
-const colorRight = "#8B0000"; // اللون الثاني للأحمر
-let isLeft = true; // متغير لتحديد أي لون مفعل
-
-// ==========================
-// ===== عند الضغط على زرار التغيير =====
-// ==========================
-colorSwitch.addEventListener("click", () => {
-    if(isLeft){
-        body.style.backgroundColor = colorRight; // تغيير الخلفية للأحمر
-        switchCircle.style.marginLeft = "31px";  // تحريك الدائرة للجهة اليمنى
-    } else {
-        body.style.backgroundColor = colorLeft;  // تغيير الخلفية للبينك
-        switchCircle.style.marginLeft = "1px";   // إعادة الدائرة لليسار
-    }
-    isLeft = !isLeft; // تبديل الحالة
-});
-</script>
-
-</body>
-</html>
