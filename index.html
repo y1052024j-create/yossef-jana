@@ -1,247 +1,357 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>♥JANA & YOSSEF♥ FOREVER</title>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-<style>
-* {margin:0; padding:0; box-sizing:border-box;}
-body {
-  font-family: 'Cairo', sans-serif;
-  background: #B20000;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JANA & YOSSEF ♥ FOREVER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* ===== القلوب الخلفية ===== */
-.floating-hearts {
-  position: fixed;
-  inset:0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-}
-.floating-heart {
-  position: absolute;
-  bottom: -50px;
-  color: rgba(255,255,255,0.3);
-  font-size: 25px;
-  animation: floatUp ease-in-out forwards;
-}
-@keyframes floatUp {
-  0% { transform: translateY(100vh) scale(0.5); opacity:0; }
-  10% { opacity:0.7; }
-  90% { opacity:0.7; }
-  100% { transform: translateY(-70vh) scale(1); opacity:0; }
-}
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #B20000;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
 
-/* ===== القلب الكبير ===== */
-.heart-wrapper {
-  position: relative;
-  z-index: 5;
-  animation: heartbeat 2s ease-in-out infinite;
-}
-.heart-svg {
-  width: 300px;
-  height: 300px;
-  fill: red;
-  max-width: 90vw;
-}
-@keyframes heartbeat {
-  0%,100% {transform: scale(1);}
-  50% {transform: scale(1.05);}
-}
+    /* ===== القلوب المتحركة في الخلفية ===== */
+    .floating-hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
 
-/* ===== المحتوى الثابت فوق القلب ===== */
-.overlay-content {
-  position: absolute;
-  top:50%;
-  left:50%;
-  transform: translate(-50%, -50%);
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 10;
-}
+    .floating-heart {
+      position: absolute;
+      bottom: -50px;
+      color: rgba(255, 255, 255, 0.15);
+      animation: floatUp ease-in-out forwards;
+    }
 
-/* ===== النصوص ===== */
-.names {text-align:center; margin-bottom:15px;}
-.names h1 {font-family:'Dancing Script', cursive; color:#fff; font-size:2rem;}
-.names p {font-family:'Dancing Script', cursive; color:rgba(255,255,255,0.8); font-size:1.4rem; margin-top:5px;}
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      10% { opacity: 0.7; }
+      90% { opacity: 0.7; }
+      100% { transform: translateY(-100px) scale(1); opacity: 0; }
+    }
 
-/* ===== العداد ===== */
-.timer-overlay {
-  display:flex;
-  flex-direction: row;
-  justify-content:center;
-  align-items:center;
-  gap: 5px;
-  max-width: 70%;
-  overflow: hidden;
-}
-.timer-unit {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  min-width: 30px;
-  flex-shrink: 1;
-}
-.timer-value {
-  color:#fff;
-  font-weight:700;
-  font-size:0.9rem;
-  white-space:nowrap;
-}
-.timer-label {
-  color: rgba(255,255,255,0.8);
-  font-size:8px;
-}
+    /* ===== نبضة القلب ===== */
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
 
-/* ===== قسم الباسورد ===== */
-.password-section {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:12px;
-  margin-top:20px;
-  width: 100%;
-  max-width:260px;
-}
-.lock-icon {color: rgba(255,255,255,0.7); font-size:28px;}
-.password-input {
-  width:100%;
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
-  border:1px solid rgba(255,255,255,0.3);
-  border-radius:10px;
-  padding:10px;
-  text-align:center;
-  color:#fff;
-  font-size:14px;
-  outline:none;
-}
-.password-input::placeholder {color: rgba(200,200,200,0.7);}
-.login-btn {
-  width:100%;
-  background: hsl(0,100%,45%);
-  color:#fff;
-  border:none;
-  border-radius:10px;
-  padding:10px;
-  font-weight:700;
-  font-size:14px;
-  cursor:pointer;
-}
-.login-btn:hover {background:hsl(0,100%,50%);}
-.error-msg {color:#fff; font-size:12px; display:none;}
-</style>
+    /* ===== ظهور تدريجي ===== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== المحتوى الرئيسي ===== */
+    .main-container {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* ===== الأسماء ===== */
+    .names {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .names h1 {
+      font-family: 'Dancing Script', cursive;
+      color: #fff;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .names p {
+      font-family: 'Dancing Script', cursive;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.4rem;
+      margin-top: 4px;
+    }
+
+    /* ===== القلب الكبير ===== */
+    .heart-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: heartbeat 2s ease-in-out infinite;
+      filter: drop-shadow(0 20px 40px rgba(80, 0, 0, 0.6));
+    }
+
+    .heart-svg {
+      width: 280px;
+      height: 280px;
+      filter: drop-shadow(0 10px 30px rgba(100, 0, 0, 0.5));
+    }
+
+    @media (min-width: 640px) {
+      .heart-svg { width: 320px; height: 320px; }
+      .names h1 { font-size: 2.5rem; }
+      .names p { font-size: 1.6rem; }
+    }
+
+    /* ===== العداد ===== */
+    .timer-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 16px;
+    }
+
+    .timer {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .timer-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .timer-value {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.2rem;
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+    }
+
+    @media (min-width: 640px) {
+      .timer-value { font-size: 1.5rem; }
+      .timer { gap: 12px; }
+    }
+
+    .timer-label {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 10px;
+      margin-top: 4px;
+    }
+
+    @media (min-width: 640px) {
+      .timer-label { font-size: 12px; }
+    }
+
+    /* ===== قسم الباسورد ===== */
+    .password-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px;
+      width: 100%;
+      max-width: 260px;
+    }
+
+    .lock-icon {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 28px;
+    }
+
+    .password-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 10px 16px;
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .password-input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .password-input:focus {
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .login-btn {
+      width: 100%;
+      background: hsl(0, 100%, 45%);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    .login-btn:hover {
+      background: hsl(0, 100%, 50%);
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    }
+
+    .error-msg {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 12px;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .success-msg {
+      margin-top: 32px;
+      text-align: center;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .success-msg p {
+      font-family: 'Dancing Script', cursive;
+      color: #fff;
+      font-size: 1.5rem;
+    }
+
+    .hidden { display: none; }
+  </style>
 </head>
 <body>
 
-<!-- القلوب الخلفية -->
-<div class="floating-hearts" id="floatingHearts"></div>
+  <!-- القلوب المتحركة في الخلفية -->
+  <div class="floating-hearts" id="floatingHearts"></div>
 
-<!-- القلب فقط -->
-<div class="heart-wrapper">
-  <svg class="heart-svg" viewBox="0 0 512 512">
-    <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/>
-  </svg>
-</div>
+  <!-- المحتوى الرئيسي -->
+  <div class="main-container">
 
-<!-- المحتوى الثابت (النصوص + العداد + الباسورد) -->
-<div class="overlay-content">
-  <!-- النصوص -->
-  <div class="names">
-    <h1>♥ JANA & YOSSEF ♥</h1>
-    <p>FOREVER</p>
+    <!-- الأسماء -->
+    <div class="names">
+      <h1>♥ JANA & YOSSEF ♥</h1>
+      <p>FOREVER</p>
+    </div>
+
+    <!-- القلب الكبير مع العداد -->
+    <div class="heart-wrapper">
+      <svg class="heart-svg" viewBox="0 0 512 512">
+        <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" fill="hsl(0, 100%, 45%)"/>
+      </svg>
+      <div class="timer-overlay">
+        <div class="timer" id="timer"></div>
+      </div>
+    </div>
+
+    <!-- قسم الباسورد -->
+    <div class="password-section" id="passwordSection">
+      <div class="lock-icon">🔒</div>
+      <input type="password" class="password-input" id="passwordInput" placeholder="ادخل كلمة السر" />
+      <button class="login-btn" id="loginBtn">دخول</button>
+      <p class="error-msg hidden" id="errorMsg">كلمة المرور خاطئة، حاول تاني ❌</p>
+    </div>
+
+    <!-- رسالة النجاح -->
+    <div class="success-msg hidden" id="successMsg">
+      <p>بحبك يا حياتي 💕</p>
+    </div>
+
   </div>
 
-  <!-- العداد -->
-  <div class="timer-overlay">
-    <div class="timer" id="timer"></div>
-  </div>
+  <script>
+    // ===== العداد =====
+    const START_DATE = new Date(2024, 4, 10, 18, 0, 0); // 10 مايو 2024 الساعة 6 مساءً
 
-  <!-- قسم الباسورد -->
-  <div class="password-section" id="passwordSection">
-    <div class="lock-icon">🔒</div>
-    <input type="password" class="password-input" id="passwordInput" placeholder="ادخل كلمة السر" />
-    <button class="login-btn" id="loginBtn">دخول</button>
-    <p class="error-msg" id="errorMsg">كلمة المرور خاطئة، حاول تاني ❌</p>
-  </div>
-</div>
+    function updateTimer() {
+      const now = new Date();
+      const diff = now.getTime() - START_DATE.getTime();
+      const totalSeconds = Math.floor(diff / 1000);
 
-<script>
-  // ===== العداد =====
-  const START_DATE = new Date(2024,4,10,18,0,0);
-  function updateTimer(){
-    const now = new Date();
-    let diff = now - START_DATE;
-    if(diff<0) diff=0;
+      const years = Math.floor(totalSeconds / (365.25 * 24 * 3600));
+      const remainAfterYears = totalSeconds - years * Math.floor(365.25 * 24 * 3600);
+      const days = Math.floor(remainAfterYears / (24 * 3600));
+      const hours = Math.floor((remainAfterYears % (24 * 3600)) / 3600);
+      const minutes = Math.floor((remainAfterYears % 3600) / 60);
+      const seconds = remainAfterYears % 60;
 
-    const seconds = Math.floor(diff/1000);
-    const minutes = Math.floor(seconds/60);
-    const hours = Math.floor(minutes/60);
-    const days = Math.floor(hours/24);
-    const years = Math.floor(days/365.25);
+      const units = [
+        { label: "سنة", value: years },
+        { label: "يوم", value: days },
+        { label: "ساعة", value: hours },
+        { label: "دقيقة", value: minutes },
+        { label: "ثانية", value: seconds },
+      ];
 
-    const remainingDays = days - Math.floor(years*365.25);
-    const remainingHours = hours%24;
-    const remainingMinutes = minutes%60;
-    const remainingSeconds = seconds%60;
-
-    const units = [
-      {label:"سنة", value:years},
-      {label:"يوم", value:remainingDays},
-      {label:"ساعة", value:remainingHours},
-      {label:"دقيقة", value:remainingMinutes},
-      {label:"ثانية", value:remainingSeconds},
-    ];
-
-    const timerEl = document.getElementById("timer");
-    timerEl.innerHTML = units.map(u=>`<div class="timer-unit"><span class="timer-value">${String(u.value).padStart(2,'0')}</span><span class="timer-label">${u.label}</span></div>`).join('');
-  }
-  updateTimer();
-  setInterval(updateTimer,1000);
-
-  // ===== القلوب الخلفية =====
-  function createFloatingHeart(){
-    const container=document.getElementById("floatingHearts");
-    const heart=document.createElement("div");
-    heart.classList.add("floating-heart");
-    heart.textContent="♥";
-    heart.style.left=Math.random()*100+"%";
-    heart.style.fontSize=(20+Math.random()*20)+"px";
-    heart.style.animationDuration=(5+Math.random()*5)+"s";
-    container.appendChild(heart);
-    setTimeout(()=>heart.remove(),12000);
-  }
-  for(let i=0;i<6;i++) setTimeout(createFloatingHeart,i*500);
-  setInterval(createFloatingHeart,1500);
-
-  // ===== الباسورد =====
-  const passwordInput = document.getElementById("passwordInput");
-  const loginBtn = document.getElementById("loginBtn");
-  const errorMsg = document.getElementById("errorMsg");
-
-  loginBtn.addEventListener("click", tryLogin);
-  passwordInput.addEventListener("keydown", function(e){
-    if(e.key==="Enter") tryLogin();
-    errorMsg.style.display="none";
-  });
-
-  function tryLogin(){
-    if(passwordInput.value === "1052024"){
-      window.location.href="page2.html";
-    } else {
-      errorMsg.style.display="block";
-      setTimeout(()=>errorMsg.style.display="none",2500);
+      const timerEl = document.getElementById("timer");
+      timerEl.innerHTML = units.map(u =>
+        `<div class="timer-unit">
+          <span class="timer-value">${String(u.value).padStart(2, "0")}</span>
+          <span class="timer-label">${u.label}</span>
+        </div>`
+      ).join("");
     }
-  }
-</script>
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+
+    // ===== القلوب المتحركة =====
+    function createFloatingHeart() {
+      const container = document.getElementById("floatingHearts");
+      const heart = document.createElement("div");
+      heart.classList.add("floating-heart");
+      heart.textContent = "♥";
+      heart.style.left = Math.random() * 100 + "%";
+      heart.style.fontSize = (20 + Math.random() * 25) + "px";
+      heart.style.animationDuration = (6 + Math.random() * 6) + "s";
+      container.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 12000);
+    }
+
+    for (let i = 0; i < 8; i++) {
+      setTimeout(createFloatingHeart, i * 500);
+    }
+    setInterval(createFloatingHeart, 1500);
+
+    // ===== الباسورد =====
+    const passwordInput = document.getElementById("passwordInput");
+    const loginBtn = document.getElementById("loginBtn");
+    const errorMsg = document.getElementById("errorMsg");
+    const passwordSection = document.getElementById("passwordSection");
+    const successMsg = document.getElementById("successMsg");
+
+    function tryLogin() {
+      if (passwordInput.value === "1052024") {
+        passwordSection.classList.add("hidden");
+        successMsg.classList.remove("hidden");
+      } else {
+        errorMsg.classList.remove("hidden");
+        setTimeout(() => errorMsg.classList.add("hidden"), 2500);
+      }
+    }
+
+    loginBtn.addEventListener("click", tryLogin);
+    passwordInput.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") tryLogin();
+      errorMsg.classList.add("hidden");
+    });
+  </script>
 </body>
 </html>
