@@ -1,166 +1,167 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>♥JANA & YOSSEF♥ FOREVER</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * {margin:0; padding:0; box-sizing:border-box;}
-    body {
-      font-family: 'Cairo', sans-serif;
-      background: #B20000;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>♥JANA & YOSSEF♥ FOREVER</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* {margin:0; padding:0; box-sizing:border-box;}
+body {
+  font-family: 'Cairo', sans-serif;
+  background: #B20000;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
 
-    /* ===== القلوب الخلفية ===== */
-    .floating-hearts {
-      position: fixed;
-      inset:0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
-    }
-    .floating-heart {
-      position: absolute;
-      bottom: -50px;
-      color: rgba(255,255,255,0.3);
-      font-size: 25px;
-      animation: floatUp ease-in-out forwards;
-    }
-    @keyframes floatUp {
-      0% { transform: translateY(100vh) scale(0.5); opacity:0; }
-      10% { opacity:0.7; }
-      90% { opacity:0.7; }
-      100% { transform: translateY(-70vh) scale(1); opacity:0; }
-    }
+/* ===== القلوب الخلفية ===== */
+.floating-hearts {
+  position: fixed;
+  inset:0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.floating-heart {
+  position: absolute;
+  bottom: -50px;
+  color: rgba(255,255,255,0.3);
+  font-size: 25px;
+  animation: floatUp ease-in-out forwards;
+}
+@keyframes floatUp {
+  0% { transform: translateY(100vh) scale(0.5); opacity:0; }
+  10% { opacity:0.7; }
+  90% { opacity:0.7; }
+  100% { transform: translateY(-70vh) scale(1); opacity:0; }
+}
 
-    /* ===== القلب الكبير ===== */
-    .heart-wrapper {
-      position: relative;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
-    }
-    .heart-svg {
-      width: 300px;
-      height: 300px;
-      fill: red;
-      animation: heartbeat 2s ease-in-out infinite;
-    }
-    @keyframes heartbeat {
-      0%,100% {transform: scale(1);}
-      50% {transform: scale(1.05);}
-    }
+/* ===== القلب الكبير مع العداد ===== */
+.heart-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
+  animation: heartbeat 2s ease-in-out infinite;
+}
+.heart-svg {
+  width: 300px;
+  height: 300px;
+  fill: red;
+}
+@keyframes heartbeat {
+  0%,100% {transform: scale(1);}
+  50% {transform: scale(1.05);}
+}
 
-    /* ===== العداد داخل القلب ===== */
-    .timer-overlay {
-      position: absolute;
-      top:50%;
-      left:50%;
-      transform: translate(-50%, -50%);
-      display:flex;
-      flex-wrap: wrap;
-      justify-content:center;
-      align-items:center;
-      gap: 8px;
-      z-index:15;
-    }
-    .timer-unit {display:flex; flex-direction:column; align-items:center;}
-    .timer-value {color:#fff; font-weight:700; font-size:1.2rem;}
-    .timer-label {color: rgba(255,255,255,0.8); font-size:12px;}
+/* ===== العداد ===== */
+.timer-overlay {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  display:flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content:center;
+  align-items:center;
+  z-index:15;
+  /* يتحرك مع القلب */
+}
+.timer-unit {display:flex; flex-direction:column; align-items:center;}
+.timer-value {color:#fff; font-weight:700; font-size:1rem; white-space:nowrap;}
+.timer-label {color: rgba(255,255,255,0.8); font-size:10px;}
 
-    /* ===== النصوص فوق القلب ===== */
-    .names {text-align:center; margin-bottom:20px; z-index:15;}
-    .names h1 {font-family:'Dancing Script', cursive; color:#fff; font-size:2rem;}
-    .names p {font-family:'Dancing Script', cursive; color:rgba(255,255,255,0.8); font-size:1.4rem; margin-top:5px;}
+/* ===== النصوص فوق القلب ===== */
+.names {text-align:center; margin-bottom:20px; z-index:15;}
+.names h1 {font-family:'Dancing Script', cursive; color:#fff; font-size:2rem;}
+.names p {font-family:'Dancing Script', cursive; color:rgba(255,255,255,0.8); font-size:1.4rem; margin-top:5px;}
 
-    /* ===== قسم الباسورد ===== */
-    .password-section {
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:12px;
-      margin-top:20px;
-      width: 100%;
-      max-width:260px;
-      z-index:15;
-    }
-    .lock-icon {color: rgba(255,255,255,0.7); font-size:28px;}
-    .password-input {
-      width:100%;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(10px);
-      border:1px solid rgba(255,255,255,0.3);
-      border-radius:10px;
-      padding:10px;
-      text-align:center;
-      color:#fff;
-      font-size:14px;
-      outline:none;
-    }
-    .password-input::placeholder {color: rgba(200,200,200,0.7);}
-    .login-btn {
-      width:100%;
-      background: hsl(0,100%,45%);
-      color:#fff;
-      border:none;
-      border-radius:10px;
-      padding:10px;
-      font-weight:700;
-      font-size:14px;
-      cursor:pointer;
-    }
-    .login-btn:hover {background:hsl(0,100%,50%);}
-    .error-msg {color:#fff; font-size:12px; display:none;}
-  </style>
+/* ===== قسم الباسورد ===== */
+.password-section {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  margin-top:20px;
+  width: 100%;
+  max-width:260px;
+  z-index:15;
+}
+.lock-icon {color: rgba(255,255,255,0.7); font-size:28px;}
+.password-input {
+  width:100%;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border:1px solid rgba(255,255,255,0.3);
+  border-radius:10px;
+  padding:10px;
+  text-align:center;
+  color:#fff;
+  font-size:14px;
+  outline:none;
+}
+.password-input::placeholder {color: rgba(200,200,200,0.7);}
+.login-btn {
+  width:100%;
+  background: hsl(0,100%,45%);
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  padding:10px;
+  font-weight:700;
+  font-size:14px;
+  cursor:pointer;
+}
+.login-btn:hover {background:hsl(0,100%,50%);}
+.error-msg {color:#fff; font-size:12px; display:none;}
+</style>
 </head>
 <body>
 
-  <!-- القلوب الخلفية -->
-  <div class="floating-hearts" id="floatingHearts"></div>
+<!-- القلوب الخلفية -->
+<div class="floating-hearts" id="floatingHearts"></div>
 
-  <div class="heart-wrapper">
-    <!-- النصوص فوق القلب -->
-    <div class="names">
-      <h1>♥ JANA & YOSSEF ♥</h1>
-      <p>FOREVER</p>
-    </div>
-
-    <!-- القلب الكبير -->
-    <svg class="heart-svg" viewBox="0 0 512 512">
-      <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/>
-    </svg>
-
-    <!-- العداد داخل القلب -->
-    <div class="timer-overlay">
-      <div class="timer" id="timer"></div>
-    </div>
-
-    <!-- قسم الباسورد -->
-    <div class="password-section" id="passwordSection">
-      <div class="lock-icon">🔒</div>
-      <input type="password" class="password-input" id="passwordInput" placeholder="ادخل كلمة السر" />
-      <button class="login-btn" id="loginBtn">دخول</button>
-      <p class="error-msg" id="errorMsg">كلمة المرور خاطئة، حاول تاني ❌</p>
-    </div>
+<div class="heart-wrapper">
+  <!-- النصوص فوق القلب -->
+  <div class="names">
+    <h1>♥ JANA & YOSSEF ♥</h1>
+    <p>FOREVER</p>
   </div>
+
+  <!-- القلب الكبير -->
+  <svg class="heart-svg" viewBox="0 0 512 512">
+    <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/>
+  </svg>
+
+  <!-- العداد داخل القلب -->
+  <div class="timer-overlay">
+    <div class="timer" id="timer"></div>
+  </div>
+
+  <!-- قسم الباسورد -->
+  <div class="password-section" id="passwordSection">
+    <div class="lock-icon">🔒</div>
+    <input type="password" class="password-input" id="passwordInput" placeholder="ادخل كلمة السر" />
+    <button class="login-btn" id="loginBtn">دخول</button>
+    <p class="error-msg" id="errorMsg">كلمة المرور خاطئة، حاول تاني ❌</p>
+  </div>
+</div>
 
 <script>
   // ===== العداد =====
-  const START_DATE = new Date(2024, 4, 10, 18, 0, 0); // 10/5/2024 الساعة 6 مساءً
+  const START_DATE = new Date(2024,4,10,18,0,0);
   function updateTimer(){
     const now = new Date();
     let diff = now - START_DATE;
-    if(diff < 0) diff = 0; // منع الأرقام السالبة
+    if(diff<0) diff=0;
 
     const seconds = Math.floor(diff/1000);
     const minutes = Math.floor(seconds/60);
@@ -169,9 +170,9 @@
     const years = Math.floor(days/365.25);
 
     const remainingDays = days - Math.floor(years*365.25);
-    const remainingHours = hours %24;
-    const remainingMinutes = minutes %60;
-    const remainingSeconds = seconds %60;
+    const remainingHours = hours%24;
+    const remainingMinutes = minutes%60;
+    const remainingSeconds = seconds%60;
 
     const units = [
       {label:"سنة", value:years},
@@ -189,13 +190,13 @@
 
   // ===== القلوب الخلفية =====
   function createFloatingHeart(){
-    const container = document.getElementById("floatingHearts");
-    const heart = document.createElement("div");
+    const container=document.getElementById("floatingHearts");
+    const heart=document.createElement("div");
     heart.classList.add("floating-heart");
     heart.textContent="♥";
-    heart.style.left = Math.random()*100 + "%";
-    heart.style.fontSize = (20 + Math.random()*20)+"px";
-    heart.style.animationDuration = (5 + Math.random()*5)+"s";
+    heart.style.left=Math.random()*100+"%";
+    heart.style.fontSize=(20+Math.random()*20)+"px";
+    heart.style.animationDuration=(5+Math.random()*5)+"s";
     container.appendChild(heart);
     setTimeout(()=>heart.remove(),12000);
   }
@@ -206,7 +207,6 @@
   const passwordInput = document.getElementById("passwordInput");
   const loginBtn = document.getElementById("loginBtn");
   const errorMsg = document.getElementById("errorMsg");
-  const passwordSection = document.getElementById("passwordSection");
 
   loginBtn.addEventListener("click", tryLogin);
   passwordInput.addEventListener("keydown", function(e){
@@ -216,7 +216,7 @@
 
   function tryLogin(){
     if(passwordInput.value === "1052024"){
-      window.location.href="page2.html"; // الصفحة الثانية
+      window.location.href="page2.html";
     } else {
       errorMsg.style.display="block";
       setTimeout(()=>errorMsg.style.display="none",2500);
