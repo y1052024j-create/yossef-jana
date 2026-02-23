@@ -339,8 +339,8 @@
 
     function tryLogin() {
       if (passwordInput.value === "1052024") {
-        passwordSection.classList.add("hidden");
-        successMsg.classList.remove("hidden");
+        // لو الباسورد صح، نروح لصفحة جديدة
+        window.location.href = "your-page.html"; // ضع هنا رابط الصفحة الجديدة
       } else {
         errorMsg.classList.remove("hidden");
         setTimeout(() => errorMsg.classList.add("hidden"), 2500);
