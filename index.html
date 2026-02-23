@@ -40,51 +40,67 @@ body {
   100% { transform: translateY(-70vh) scale(1); opacity:0; }
 }
 
-/* ===== القلب الكبير مع العداد ===== */
+/* ===== القلب الكبير ===== */
 .heart-wrapper {
   position: relative;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
+  z-index: 5;
   animation: heartbeat 2s ease-in-out infinite;
 }
 .heart-svg {
   width: 300px;
   height: 300px;
   fill: red;
-  max-width: 90vw; /* القلب لا يخرج من شاشة الهاتف */
+  max-width: 90vw;
 }
 @keyframes heartbeat {
   0%,100% {transform: scale(1);}
   50% {transform: scale(1.05);}
 }
 
-/* ===== العداد بالعرض داخل القلب ===== */
-.timer-overlay {
+/* ===== المحتوى الثابت فوق القلب ===== */
+.overlay-content {
   position: absolute;
   top:50%;
   left:50%;
   transform: translate(-50%, -50%);
   display:flex;
-  flex-direction: row; /* بالعرض */
-  flex-wrap: nowrap;
-  justify-content:center;
-  align-items:center;
-  gap: 8px;
-  max-width: 80%; /* لا يتجاوز عرض القلب */
-  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
 }
-.timer-unit {display:flex; flex-direction:column; align-items:center; min-width: 40px;}
-.timer-value {color:#fff; font-weight:700; font-size:1rem; white-space:nowrap;}
-.timer-label {color: rgba(255,255,255,0.8); font-size:10px;}
 
-/* ===== النصوص فوق القلب ===== */
-.names {text-align:center; margin-bottom:15px; z-index:15;}
+/* ===== النصوص ===== */
+.names {text-align:center; margin-bottom:15px;}
 .names h1 {font-family:'Dancing Script', cursive; color:#fff; font-size:2rem;}
 .names p {font-family:'Dancing Script', cursive; color:rgba(255,255,255,0.8); font-size:1.4rem; margin-top:5px;}
+
+/* ===== العداد ===== */
+.timer-overlay {
+  display:flex;
+  flex-direction: row;
+  justify-content:center;
+  align-items:center;
+  gap: 5px;
+  max-width: 70%;
+  overflow: hidden;
+}
+.timer-unit {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-width: 30px;
+  flex-shrink: 1;
+}
+.timer-value {
+  color:#fff;
+  font-weight:700;
+  font-size:0.9rem;
+  white-space:nowrap;
+}
+.timer-label {
+  color: rgba(255,255,255,0.8);
+  font-size:8px;
+}
 
 /* ===== قسم الباسورد ===== */
 .password-section {
@@ -95,7 +111,6 @@ body {
   margin-top:20px;
   width: 100%;
   max-width:260px;
-  z-index:15;
 }
 .lock-icon {color: rgba(255,255,255,0.7); font-size:28px;}
 .password-input {
@@ -131,19 +146,22 @@ body {
 <!-- القلوب الخلفية -->
 <div class="floating-hearts" id="floatingHearts"></div>
 
+<!-- القلب فقط -->
 <div class="heart-wrapper">
-  <!-- النصوص فوق القلب -->
+  <svg class="heart-svg" viewBox="0 0 512 512">
+    <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/>
+  </svg>
+</div>
+
+<!-- المحتوى الثابت (النصوص + العداد + الباسورد) -->
+<div class="overlay-content">
+  <!-- النصوص -->
   <div class="names">
     <h1>♥ JANA & YOSSEF ♥</h1>
     <p>FOREVER</p>
   </div>
 
-  <!-- القلب الكبير -->
-  <svg class="heart-svg" viewBox="0 0 512 512">
-    <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/>
-  </svg>
-
-  <!-- العداد داخل القلب بالعرض -->
+  <!-- العداد -->
   <div class="timer-overlay">
     <div class="timer" id="timer"></div>
   </div>
