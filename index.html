@@ -365,8 +365,6 @@
   playBtn.addEventListener('click', function() {
     if(audio.paused){
       audio.play();
-      playBtn.textContent = 'إيقاف الموسيقى';
-    } else {
       audio.pause();
       playBtn.textContent = 'تشغيل الموسيقى';
     }
