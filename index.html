@@ -390,28 +390,31 @@
     function showSecondPage() {
       secretContent.style.display = "flex";
 
-      const textBox = document.getElementById("textBox");
-const textEnd = document.getElementById("textEnd");
-
+      // النص التدريجي
 const fullText = `اكتب هنا الكلام اللي عايزه يظهر تدريجيًا داخل المستطيل. 
 يمكنك التحكم في السرعة والتعديل على النص بسهولة. 
 النص هيتكتب حرف حرف وكأن حد بيكتبه.`;
 
+// سرعة الكتابة بالمللي ثانية لكل حرف
 const typingSpeed = 40;
 
 let i = 0;
-textEnd.style.display = "none"; // نخلي النص تحت مخفي من البداية
-
 function typeWriter() {
   if (i < fullText.length) {
     textBox.textContent += fullText.charAt(i);
     i++;
     setTimeout(typeWriter, typingSpeed);
   } else {
-    // لما النص يخلص، نعرض النص اللي تحت
+    // بعد ما النص يخلص، نخلي النص النهائي يظهر
     textEnd.style.display = "block";
   }
 }
+
+// تأكد إن النص النهائي مخفي افتراضيًا
+textEnd.style.display = "none";
+
+// بدء الكتابة تدريجي عند تشغيل الوظيفة
+typeWriter();
 
 window.onload = typeWriter;
 
