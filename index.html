@@ -240,28 +240,45 @@
     .hidden { display: none; }
 
     /* ===== المستطيل التدريجي (الصفحة الثانية) ===== */
-    #secretContent {
-      display: none;
-      width: 100%;
-      margin-top: 30px;
-      justify-content: center;
-    }
+#secretContent {
+  display: none;
+  width: 100%;
+  margin-top: 30px;
+  justify-content: center;
+}
 
-    .text-box-container {
-      width: 96%;
-      max-width: 800px;
-      overflow-y: auto;
-      max-height: 80vh;
-    }
+/* الكونتينر */
+.text-box-container {
+  width: 96%;
+  max-width: 800px;
+  overflow-y: auto;
+  max-height: 80vh;
+  display: flex;
+  justify-content: center;
+}
 
-    
+/* 👇 المستطيل الشفاف */
+.glass-box {
+  width: 600px;      /* 👈 غير العرض من هنا */
+  height: 400px;     /* 👈 غير الطول من هنا */
 
-    
-    .text-end {
-      margin-top: 20px;
-      text-align: center;
-      font-weight: bold;
-    }
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-radius: 25px;
+
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+
+  padding: 20px;
+}
+
+/* النص اللي جوه */
+.text-end {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+}
   </style>
 </head>
 <body>
