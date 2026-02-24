@@ -47,19 +47,16 @@
       100% { transform: translateY(-70vh) scale(1); opacity: 0; }
     }
 
-    /* ===== نبضة القلب ===== */
     @keyframes heartbeat {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.03); }
     }
 
-    /* ===== ظهور تدريجي ===== */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ===== المحتوى الرئيسي ===== */
     .main-container {
       position: relative;
       z-index: 10;
@@ -70,11 +67,10 @@
       width: 100%;
     }
 
-    /* ===== الأسماء ===== */
     .names {
       text-align: center;
       margin-bottom: 24px;
-      margin-top: 50px; /* المسافة فوق الأسميْن */
+      margin-top: 50px;
     }
 
     .names h1 {
@@ -92,7 +88,6 @@
       margin-top: 4px;
     }
 
-    /* ===== القلب الكبير ===== */
     .heart-wrapper {
       position: relative;
       display: flex;
@@ -115,7 +110,6 @@
       .names p { font-size: 1.6rem; }
     }
 
-    /* ===== العداد ===== */
     .timer-overlay {
       position: absolute;
       inset: 0;
@@ -162,7 +156,6 @@
       .timer-label { font-size: 12px; }
     }
 
-    /* ===== قسم الباسورد ===== */
     .password-section {
       display: flex;
       flex-direction: column;
@@ -239,12 +232,13 @@
 
     .hidden { display: none; }
 
-    /* ===== المستطيل الزجاجي الجديد ===== */
+    /* ===== المستطيل الشفاف ===== */
     #secretContent {
       display: none;
       width: 100%;
       margin-top: 40px;
-      justify-content: center;
+      display: flex;
+      flex-direction: column;
       align-items: center;
     }
 
@@ -255,24 +249,19 @@
     }
 
     .text-box {
-      width: 90%;
-      max-width: 650px;
+      width: 600px;
       height: 350px;
-
-      background: rgba(255, 255, 255, 0.12); /* شبه شفاف */
+      background: rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-
-      border-radius: 30px; /* حواف دائرية */
-
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9); /* ظل أسود */
-
+      border-radius: 30px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
       padding: 25px;
       color: white;
       font-size: 15px;
       line-height: 1.8;
-      overflow-y: auto;
       text-align: center;
+      overflow-y: auto;
     }
 
     .text-end {
@@ -280,25 +269,22 @@
       text-align: center;
       font-weight: bold;
       color: white;
+      display: none;
     }
 
   </style>
 </head>
 <body>
 
-  <!-- القلوب المتحركة في الخلفية -->
   <div class="floating-hearts" id="floatingHearts"></div>
 
-  <!-- المحتوى الرئيسي -->
   <div class="main-container">
 
-    <!-- الأسماء -->
     <div class="names">
       <h1>♥ JANA & YOSSEF ♥</h1>
       <p>FOREVER</p>
     </div>
 
-    <!-- القلب الكبير مع العداد -->
     <div class="heart-wrapper">
       <svg class="heart-svg" viewBox="0 0 512 512">
         <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" fill="hsl(0, 100%, 45%)"/>
@@ -308,7 +294,6 @@
       </div>
     </div>
 
-    <!-- قسم الباسورد -->
     <div class="password-section" id="passwordSection">
       <div class="lock-icon">🔒</div>
       <input type="password" class="password-input" id="passwordInput" placeholder="ادخل كلمة السر" />
@@ -316,12 +301,12 @@
       <p class="error-msg hidden" id="errorMsg">كلمة المرور خاطئة، حاول تاني ❌</p>
     </div>
 
-    <!-- الصفحة الثانية (المستطيل التدريجي) مع الزجاج -->
+    <!-- المستطيل والنص النهائي تحته -->
     <div id="secretContent">
       <div class="text-box-container">
         <div class="text-box" id="textBox"></div>
-        <div class="text-end" id="textEnd">هنا النص في نهاية المستطيل ✨</div>
       </div>
+      <div class="text-end" id="textEnd">هنا النص في نهاية المستطيل ✨</div>
     </div>
 
   </div>
@@ -336,8 +321,7 @@
   </button>
 
   <script>
-    // ===== العداد =====
-    const START_DATE = new Date(2024, 4, 10, 18, 0, 0); // 10 مايو 2024 الساعة 6 مساءً
+    const START_DATE = new Date(2024, 4, 10, 18, 0, 0);
 
     function updateTimer() {
       const now = new Date();
@@ -371,7 +355,6 @@
     updateTimer();
     setInterval(updateTimer, 1000);
 
-    // ===== القلوب المتحركة =====
     function createFloatingHeart() {
       const container = document.getElementById("floatingHearts");
       const heart = document.createElement("div");
@@ -390,27 +373,21 @@
     }
     setInterval(createFloatingHeart, 1500);
 
-    // ===== الباسورد =====
     const passwordInput = document.getElementById("passwordInput");
     const loginBtn = document.getElementById("loginBtn");
     const errorMsg = document.getElementById("errorMsg");
-    const passwordSection = document.getElementById("passwordSection");
     const secretContent = document.getElementById("secretContent");
     const textBox = document.getElementById("textBox");
+    const textEnd = document.getElementById("textEnd");
 
     function showSecondPage() {
       secretContent.style.display = "flex";
 
-      // النص التدريجي
       const fullText = `اكتب هنا الكلام اللي عايزه يظهر تدريجيًا داخل المستطيل. 
 يمكنك التحكم في السرعة والتعديل على النص بسهولة. 
 النص هيتكتب حرف حرف وكأن حد بيكتبه.`;
       const typingSpeed = 40;
       let i = 0;
-
-      // أخفي النص النهائي قبل الكتابة
-      const textEnd = document.getElementById("textEnd");
-      textEnd.style.display = "none";
 
       function typeWriter() {
         if (i < fullText.length) {
@@ -418,7 +395,6 @@
           i++;
           setTimeout(typeWriter, typingSpeed);
         } else {
-          // بعد ما يخلص الكتابة، أظهر النص النهائي
           textEnd.style.display = "block";
         }
       }
@@ -442,7 +418,6 @@
       errorMsg.classList.add("hidden");
     });
 
-    // ===== تشغيل الموسيقى =====
     const audio = document.getElementById('myAudio');
     const playBtn = document.getElementById('playBtn');
 
