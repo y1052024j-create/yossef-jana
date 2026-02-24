@@ -17,9 +17,10 @@
       background: #B20000;
       min-height: 90vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      overflow: hidden;
+      justify-content: flex-start;
+      overflow-x: hidden;
       position: relative;
     }
 
@@ -66,6 +67,7 @@
       flex-direction: column;
       align-items: center;
       padding: 20px;
+      width: 100%;
     }
 
     /* ===== الأسماء ===== */
@@ -97,6 +99,7 @@
       justify-content: center;
       animation: heartbeat 2s ease-in-out infinite;
       filter: drop-shadow(0 20px 40px rgba(80, 0, 0, 0.6));
+      margin-bottom: 20px;
     }
 
     .heart-svg {
@@ -234,6 +237,40 @@
     }
 
     .hidden { display: none; }
+
+    /* ===== المستطيل التدريجي (الصفحة الثانية) ===== */
+    #secretContent {
+      display: none;
+      width: 100%;
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .text-box-container {
+      width: 80%;
+      max-width: 800px;
+      overflow-y: auto;
+      max-height: 80vh;
+    }
+
+    .text-box {
+      background: rgba(255,255,255,0.2);
+      border-radius: 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      padding: 20px;
+      color: #fff;
+      font-size: 18px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+    }
+
+    .text-end {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -268,7 +305,24 @@
       <p class="error-msg hidden" id="errorMsg">كلمة المرور خاطئة، حاول تاني ❌</p>
     </div>
 
+    <!-- الصفحة الثانية (المستطيل التدريجي) -->
+    <div id="secretContent">
+      <div class="text-box-container">
+        <div class="text-box" id="textBox"></div>
+        <div class="text-end" id="textEnd">هنا النص في نهاية المستطيل ✨</div>
+      </div>
+    </div>
+
   </div>
+
+  <audio id="myAudio" loop>
+    <source src="Albumaty.Com_ahmd_gmal_bhbk.mp3" type="audio/mpeg">
+    متصفحك لا يدعم تشغيل الصوت
+  </audio>
+
+  <button id="playBtn" style="position: fixed; top: 10px; right: 10px; z-index: 1000; padding: 8px 12px; font-size: 14px;">
+    تشغيل الموسيقى
+  </button>
 
   <script>
     // ===== العداد =====
@@ -330,26 +384,36 @@
     const loginBtn = document.getElementById("loginBtn");
     const errorMsg = document.getElementById("errorMsg");
     const passwordSection = document.getElementById("passwordSection");
-    const successMsg = document.getElementById("successMsg");
+    const secretContent = document.getElementById("secretContent");
+    const textBox = document.getElementById("textBox");
 
-    function tryLogin() {
-  if (passwordInput.value === "1052024") {
+    function showSecondPage() {
+      secretContent.style.display = "flex";
 
-    // قفل الباسورد بس من غير ما يختفي
-    passwordInput.disabled = true;
-    loginBtn.disabled = true;
-
-    // إظهار رسالة نجاح لو عندك
-    if(successMsg){
-      successMsg.classList.remove("hidden");
+      // النص التدريجي
+      const fullText = `اكتب هنا الكلام اللي عايزه يظهر تدريجيًا داخل المستطيل. 
+يمكنك التحكم في السرعة والتعديل على النص بسهولة. 
+النص هيتكتب حرف حرف وكأن حد بيكتبه.`;
+      const typingSpeed = 40;
+      let i = 0;
+      function typeWriter() {
+        if (i < fullText.length) {
+          textBox.textContent += fullText.charAt(i);
+          i++;
+          setTimeout(typeWriter, typingSpeed);
+        }
+      }
+      typeWriter();
     }
 
-    // إظهار الصفحة التانية
-    showSecondPage();
-
-  } else {
-    errorMsg.classList.remove("hidden");
-  }
+    function tryLogin() {
+      if (passwordInput.value === "1052024") {
+        passwordInput.disabled = true;
+        loginBtn.disabled = true;
+        showSecondPage();
+      } else {
+        errorMsg.classList.remove("hidden");
+      }
     }
 
     loginBtn.addEventListener("click", tryLogin);
@@ -357,31 +421,21 @@
       if (e.key === "Enter") tryLogin();
       errorMsg.classList.add("hidden");
     });
+
+    // ===== تشغيل الموسيقى =====
+    const audio = document.getElementById('myAudio');
+    const playBtn = document.getElementById('playBtn');
+
+    playBtn.addEventListener('click', function() {
+      if(audio.paused){
+        audio.play();
+        playBtn.textContent = 'إيقاف الموسيقى';
+      } else {
+        audio.pause();
+        playBtn.textContent = 'تشغيل الموسيقى';
+      }
+    });
   </script>
-
-  <audio id="myAudio" loop>
-  <source src="Albumaty.Com_ahmd_gmal_bhbk.mp3" type="audio/mpeg">
-  متصفحك لا يدعم تشغيل الصوت
-</audio>
-
-<button id="playBtn" style="position: fixed; top: 10px; right: 10px; z-index: 1000; padding: 8px 12px; font-size: 14px;">
-  تشغيل الموسيقى
-</button>
-
-<script>
-  const audio = document.getElementById('myAudio');
-  const playBtn = document.getElementById('playBtn');
-
-  playBtn.addEventListener('click', function() {
-    if(audio.paused){
-      audio.play();
-      playBtn.textContent = 'إيقاف الموسيقى';
-    } else {
-      audio.pause();
-      playBtn.textContent = 'تشغيل الموسيقى';
-    }
-  });
-</script>
 
 </body>
 </html>
