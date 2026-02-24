@@ -264,7 +264,7 @@
     <div class="password-section" id="passwordSection">
       <div class="lock-icon">🔒</div>
       <input type="password" class="password-input" id="passwordInput" placeholder="ادخل كلمة السر" />
-      <button class="login-btn" id="loginBtn">دخول</button>
+      <button class="login-btn" id="loginBtn">ظهور</button>
       <p class="error-msg hidden" id="errorMsg">كلمة المرور خاطئة، حاول تاني ❌</p>
     </div>
 
@@ -333,13 +333,23 @@
     const successMsg = document.getElementById("successMsg");
 
     function tryLogin() {
-      if (passwordInput.value === "1052024") {
-        // لو الباسورد صح، نروح لصفحة جديدة
-        window.location.href = "page 2.html"; // ضع هنا رابط الصفحة الجديدة
-      } else {
-        errorMsg.classList.remove("hidden");
-        setTimeout(() => errorMsg.classList.add("hidden"), 2500);
-      }
+  if (passwordInput.value === "1052024") {
+
+    // قفل الباسورد بس من غير ما يختفي
+    passwordInput.disabled = true;
+    loginBtn.disabled = true;
+
+    // إظهار رسالة نجاح لو عندك
+    if(successMsg){
+      successMsg.classList.remove("hidden");
+    }
+
+    // إظهار الصفحة التانية
+    showSecondPage();
+
+  } else {
+    errorMsg.classList.remove("hidden");
+  }
     }
 
     loginBtn.addEventListener("click", tryLogin);
