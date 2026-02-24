@@ -166,15 +166,28 @@ function tryLogin(){
     setTimeout(()=>errorMsg.classList.add("hidden"),2500);
   }
 }
+<audio id="myAudio" loop>
+  <source src="Albumaty.Com_ahmd_gmal_bhbk.mp3" type="audio/mpeg">
+  متصفحك لا يدعم تشغيل الصوت
+</audio>
 
-// الموسيقى تعمل تلقائي
-const audio=document.createElement("audio");
-audio.src="Albumaty.Com_ahmd_gmal_bhbk.mp3";
-audio.loop=true;
-audio.autoplay=true;
-audio.volume=0.5;
-document.body.appendChild(audio);
+<button id="playBtn" style="position: fixed; top: 10px; right: 10px; z-index: 1000; padding: 8px 12px; font-size: 14px;">
+  تشغيل الموسيقى
+</button>
 
+<script>
+  const audio = document.getElementById('myAudio');
+  const playBtn = document.getElementById('playBtn');
+
+  playBtn.addEventListener('click', function() {
+    if(audio.paused){
+      audio.play();
+      playBtn.textContent = 'إيقاف الموسيقى';
+    } else {
+      audio.pause();
+      playBtn.textContent = 'تشغيل الموسيقى';
+    }
+  });
 </script>
 </body>
 </html>
