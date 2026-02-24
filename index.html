@@ -257,7 +257,14 @@
     #textBox {
   background: rgba(255,255,255,0.2);
   border-radius: 30px;
-  filter: drop-shadow(0 20px 40px rgba(80,0,0,0.6));
+
+  /* ظل متوزع حول كل الحواف */
+  box-shadow:
+    0 5px 10px rgba(80,0,0,0.4),    /* ظل خفيف قريب من المستطيل */
+    0 10px 20px rgba(80,0,0,0.3),   /* طبقة ثانية لتوسيع الظل */
+    0 15px 30px rgba(80,0,0,0.25),  /* طبقة أوسع لتغطية الجناب */
+    0 20px 40px rgba(80,0,0,0.2);   /* طبقة أكبر لإعطاء العمق الكامل */
+  
   padding: 20px;
   color: #fff;
   font-size: 18px;
