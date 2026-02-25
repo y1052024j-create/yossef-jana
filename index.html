@@ -1,407 +1,419 @@
-<!DOCTYPE html>  <html lang="ar" dir="rtl">  
-<head>  
-  <meta charset="UTF-8" />  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
-  <title>JANA & YOSSEF ♥ FOREVER</title>  
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet" />  
-  <style>  
-    * {  
-      margin: 0;  
-      padding: 0;  
-      box-sizing: border-box;  
-    }  body {  
-  font-family: 'Cairo', sans-serif;  
-  background: #B20000;  
-  min-height: 90vh;  
-  display: flex;  
-  flex-direction: column;  
-  align-items: center;  
-  justify-content: flex-start;  
-  overflow-x: hidden;  
-  position: relative;  
-}  
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JANA & YOSSEF ♥ FOREVER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-.floating-hearts {  
-  position: fixed;  
-  inset: 0;  
-  pointer-events: none;  
-  overflow: hidden;  
-  z-index: 0;  
-}  
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #B20000;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-.floating-heart {  
-  position: absolute;  
-  bottom: -50px;  
-  color: rgba(255, 255, 255, 0.15);  
-  animation: floatUp ease-in-out forwards;  
-}  
+    .floating-hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
 
-@keyframes floatUp {  
-  0% { transform: translateY(100vh) scale(0.5); opacity: 0; }  
-  10% { opacity: 0.7; }  
-  90% { opacity: 0.7; }  
-  100% { transform: translateY(-70vh) scale(1); opacity: 0; }  
-}  
+    .floating-heart {
+      position: absolute;
+      bottom: -50px;
+      color: rgba(255, 255, 255, 0.15);
+      animation: floatUp ease-in-out forwards;
+    }
 
-@keyframes heartbeat {  
-  0%, 100% { transform: scale(1); }  
-  50% { transform: scale(1.03); }  
-}  
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      10% { opacity: 0.7; }
+      90% { opacity: 0.7; }
+      100% { transform: translateY(-70vh) scale(1); opacity: 0; }
+    }
 
-@keyframes fadeIn {  
-  from { opacity: 0; transform: translateY(10px); }  
-  to { opacity: 1; transform: translateY(0); }  
-}  
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
 
-.main-container {  
-  position: relative;  
-  z-index: 10;  
-  display: flex;  
-  flex-direction: column;  
-  align-items: center;  
-  padding: 20px;  
-  width: 100%;  
-}  
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-.names {  
-  text-align: center;  
-  margin-bottom: 24px;  
-  margin-top: 50px;  
-}  
+    .main-container {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      width: 100%;
+    }
 
-.names h1 {  
-  font-family: 'Dancing Script', cursive;  
-  color: #fff;  
-  font-size: 2rem;  
-  font-weight: 700;  
-  letter-spacing: 2px;  
-}  
+    .names {
+      text-align: center;
+      margin-bottom: 24px;
+      margin-top: 50px;
+    }
 
-.names p {  
-  font-family: 'Dancing Script', cursive;  
-  color: rgba(255, 255, 255, 0.8);  
-  font-size: 1.4rem;  
-  margin-top: 4px;  
-}  
+    .names h1 {
+      font-family: 'Dancing Script', cursive;
+      color: #fff;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
 
-.heart-wrapper {  
-  position: relative;  
-  display: flex;  
-  align-items: center;  
-  justify-content: center;  
-  animation: heartbeat 2s ease-in-out infinite;  
-  filter: drop-shadow(0 20px 40px rgba(80, 0, 0, 0.6));  
-  margin-bottom: 20px;  
-}  
+    .names p {
+      font-family: 'Dancing Script', cursive;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.4rem;
+      margin-top: 4px;
+    }
 
-.heart-svg {  
-  width: 280px;  
-  height: 280px;  
-  filter: drop-shadow(0 10px 30px rgba(100, 0, 0, 0.5));  
-}  
+    .heart-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: heartbeat 2s ease-in-out infinite;
+      filter: drop-shadow(0 20px 40px rgba(80, 0, 0, 0.6));
+      margin-bottom: 20px;
+    }
 
-@media (min-width: 640px) {  
-  .heart-svg { width: 320px; height: 320px; }  
-  .names h1 { font-size: 2.5rem; }  
-  .names p { font-size: 1.6rem; }  
-}  
+    .heart-svg {
+      width: 280px;
+      height: 280px;
+      filter: drop-shadow(0 10px 30px rgba(100, 0, 0, 0.5));
+    }
 
-.timer-overlay {  
-  position: absolute;  
-  inset: 0;  
-  display: flex;  
-  align-items: center;  
-  justify-content: center;  
-  padding-top: 16px;  
-}  
+    @media (min-width: 640px) {
+      .heart-svg { width: 320px; height: 320px; }
+      .names h1 { font-size: 2.5rem; }
+      .names p { font-size: 1.6rem; }
+    }
 
-.timer {  
-  display: flex;  
-  gap: 8px;  
-  align-items: center;  
-  justify-content: center;  
-  flex-wrap: wrap;  
-}  
+    .timer-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 16px;
+    }
 
-.timer-unit {  
-  display: flex;  
-  flex-direction: column;  
-  align-items: center;  
-}  
+    .timer {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
-.timer-value {  
-  color: #fff;  
-  font-weight: 700;  
-  font-size: 1.2rem;  
-  font-variant-numeric: tabular-nums;  
-  line-height: 1;  
-}  
+    .timer-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-@media (min-width: 640px) {  
-  .timer-value { font-size: 1.5rem; }  
-  .timer { gap: 12px; }  
-}  
+    .timer-value {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.2rem;
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+    }
 
-.timer-label {  
-  color: rgba(255, 255, 255, 0.7);  
-  font-size: 10px;  
-  margin-top: 4px;  
-}  
+    @media (min-width: 640px) {
+      .timer-value { font-size: 1.5rem; }
+      .timer { gap: 12px; }
+    }
 
-@media (min-width: 640px) {  
-  .timer-label { font-size: 12px; }  
-}  
+    .timer-label {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 10px;
+      margin-top: 4px;
+    }
 
-.password-section {  
-  display: flex;  
-  flex-direction: column;  
-  align-items: center;  
-  gap: 12px;  
-  margin-top: 24px;  
-  width: 100%;  
-  max-width: 260px;  
-}  
+    @media (min-width: 640px) {
+      .timer-label { font-size: 12px; }
+    }
 
-.lock-icon {  
-  color: rgba(255, 255, 255, 0.7);  
-  font-size: 28px;  
-}  
+    .password-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px;
+      width: 100%;
+      max-width: 260px;
+    }
 
-.password-input {  
-  width: 100%;  
-  background: rgba(255, 255, 255, 0.1);  
-  backdrop-filter: blur(10px);  
-  border: 1px solid rgba(255, 255, 255, 0.2);  
-  border-radius: 10px;  
-  padding: 10px 16px;  
-  text-align: center;  
-  color: #fff;  
-  font-size: 14px;  
-  outline: none;  
-  transition: border-color 0.3s;  
-}  
+    .lock-icon {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 28px;
+    }
 
-.password-input::placeholder {  
-  color: rgba(255, 255, 255, 0.4);  
-}  
+    .password-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 10px 16px;
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
 
-.password-input:focus {  
-  border-color: rgba(255, 255, 255, 0.5);  
-}  
+    .password-input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
 
-.login-btn {  
-  width: 100%;  
-  background: hsl(0, 100%, 45%);  
-  color: #fff;  
-  border: none;  
-  border-radius: 10px;  
-  padding: 10px;  
-  font-weight: 700;  
-  font-size: 14px;  
-  cursor: pointer;  
-  transition: all 0.3s ease;  
-  font-family: 'Cairo', sans-serif;  
-}  
+    .password-input:focus {
+      border-color: rgba(255, 255, 255, 0.5);
+    }
 
-.login-btn:hover {  
-  background: hsl(0, 100%, 50%);  
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);  
-}  
+    .login-btn {
+      width: 100%;
+      background: hsl(0, 100%, 45%);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Cairo', sans-serif;
+    }
 
-.error-msg {  
-  color: rgba(255, 255, 255, 0.8);  
-  font-size: 12px;  
-  animation: fadeIn 0.3s ease-out;  
-}  
+    .login-btn:hover {
+      background: hsl(0, 100%, 50%);
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    }
 
-.success-msg {  
-  margin-top: 32px;  
-  text-align: center;  
-  animation: fadeIn 0.5s ease-out;  
-}  
+    .error-msg {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 12px;
+      animation: fadeIn 0.3s ease-out;
+    }
 
-.success-msg p {  
-  font-family: 'Dancing Script', cursive;  
-  color: #fff;  
-  font-size: 1.5rem;  
-}  
+    .success-msg {
+      margin-top: 32px;
+      text-align: center;
+      animation: fadeIn 0.5s ease-out;
+    }
 
-.hidden { display: none; }  
+    .success-msg p {
+      font-family: 'Dancing Script', cursive;
+      color: #fff;
+      font-size: 1.5rem;
+    }
 
-/* ===== المستطيل الشفاف ===== */  
-#secretContent {  
-  display: none; /* يظهر فقط بعد الباسورد */  
-  width: 100%;  
-  margin-top: 40px;  
-  flex-direction: column;  
-  align-items: center;  
-}  
+    .hidden { display: none; }
 
-.text-box-container {  
-  width: 100%;  
-  display: flex;  
-  justify-content: center;  
-}  
+    /* ===== المستطيل الشفاف ===== */
+    #secretContent {
+      display: none; /* يظهر فقط بعد الباسورد */
+      width: 100%;
+      margin-top: 40px;
+      flex-direction: column;
+      align-items: center;
+    }
 
-.text-box {  
-  width: 600px;  
-  min-height: 2100px;  
-  background: rgba(255, 255, 255, 0.12);  
-  backdrop-filter: blur(12px);  
-  -webkit-backdrop-filter: blur(12px);  
-  border-radius: 30px;  
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);  
-  padding: 25px;  
-  color: white;  
-  font-size: 20px;  
-  line-height: 1.8;  
-  text-align: center;  
-  overflow-y: auto;  
-}  
+    .text-box-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
 
-.text-end {  
-  margin-top: 30px;  
-  text-align: center;  
-  font-weight: bold;  
-  color: white;  
-  display: none;  
-}
+    .text-box {
+      width: 600px;
+      min-height: 2100px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 30px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+      padding: 25px;
+      color: white;
+      font-size: 20px;
+      line-height: 1.8;
+      text-align: center;
+      overflow-y: auto;
+    }
 
-  </style>  
-</head>  
-<body>  
-  <div class="floating-hearts" id="floatingHearts"></div>    <div class="main-container">  <div class="names">  
-  <h1>♥ JANA & YOSSEF ♥</h1>  
-  <p>FOREVER</p>  
-</div>  
+    .text-end {
+      margin-top: 30px;
+      text-align: center;
+      font-weight: bold;
+      color: white;
+      display: none;
+    }
 
-<div class="heart-wrapper">  
-  <svg class="heart-svg" viewBox="0 0 512 512">  
-    <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" fill="hsl(0, 100%, 45%)"/>  
-  </svg>  
-  <div class="timer-overlay">  
-    <div class="timer" id="timer"></div>  
-  </div>  
-</div>  
+  </style>
+</head>
+<body>
 
-<div class="password-section" id="passwordSection">  
-  <div class="lock-icon">🔒</div>  
-  <input type="password" class="password-input" id="passwordInput" placeholder="ادخل كلمة السر" />  
-  <button class="login-btn" id="loginBtn">جاهزه</button>  
-  <p class="error-msg hidden" id="errorMsg">كلمة المرور خاطئة، حاول تاني ❌</p>  
-</div>  
+  <div class="floating-hearts" id="floatingHearts"></div>
 
-<div id="secretContent">  
-  <div class="text-box-container">  
-    <div class="text-box" id="textBox"></div>  
-  </div>  
-  <div class="text-end" id="textEnd">❤️‍🔥𝑩𝑨𝑯𝑬𝑩𝑬𝑲 𝑨𝑾𝑬𝑬❤️‍🔥</div>  
-</div>
+  <div class="main-container">
 
-  </div>    <audio id="myAudio" loop>  
-    <source src="AudioCutter_Albumaty.Com_adhm_nablsi_han_alan.mp3" type="audio/mpeg">  
-    متصفحك لا يدعم تشغيل الصوت  
-  </audio>    
-  <script>  
-    const START_DATE = new Date(2024, 4, 10, 18, 0, 0);  
-  
-    function updateTimer() {  
-      const now = new Date();  
-      const diff = now.getTime() - START_DATE.getTime();  
-      const totalSeconds = Math.floor(diff / 1000);  
-  
-      const years = Math.floor(totalSeconds / (365.25 * 24 * 3600));  
-      const remainAfterYears = totalSeconds - years * Math.floor(365.25 * 24 * 3600);  
-      const days = Math.floor(remainAfterYears / (24 * 3600));  
-      const hours = Math.floor((remainAfterYears % (24 * 3600)) / 3600);  
-      const minutes = Math.floor((remainAfterYears % 3600) / 60);  
-      const seconds = remainAfterYears % 60;  
-  
-      const units = [  
-        { label: "سنة", value: years },  
-        { label: "يوم", value: days },  
-        { label: "ساعة", value: hours },  
-        { label: "دقيقة", value: minutes },  
-        { label: "ثانية", value: seconds },  
-      ];  
-  
-      const timerEl = document.getElementById("timer");  
-      timerEl.innerHTML = units.map(u =>  
-        `<div class="timer-unit">  
-          <span class="timer-value">${String(u.value).padStart(2, "0")}</span>  
-          <span class="timer-label">${u.label}</span>  
-        </div>`  
-      ).join("");  
-    }  
-  
-    updateTimer();  
-    setInterval(updateTimer, 1000);  
-  
-    function createFloatingHeart() {  
-      const container = document.getElementById("floatingHearts");  
-      const heart = document.createElement("div");  
-      heart.classList.add("floating-heart");  
-      heart.textContent = "♥";  
-      heart.style.left = Math.random() * 100 + "%";  
-      heart.style.fontSize = (20 + Math.random() * 25) + "px";  
-      heart.style.animationDuration = (6 + Math.random() * 6) + "s";  
-      container.appendChild(heart);  
-  
-      setTimeout(() => heart.remove(), 12000);  
-    }  
-  
-    for (let i = 0; i < 8; i++) {  
-      setTimeout(createFloatingHeart, i * 500);  
-    }  
-    setInterval(createFloatingHeart, 1500);  
-  
-    const passwordInput = document.getElementById("passwordInput");  
-    const loginBtn = document.getElementById("loginBtn");  
-    const errorMsg = document.getElementById("errorMsg");  
-    const secretContent = document.getElementById("secretContent");  
-    const textBox = document.getElementById("textBox");  
-    const textEnd = document.getElementById("textEnd");  
-  
-    function showSecondPage() {  
-      secretContent.style.display = "flex";  
-  
-      const fullText = `       ازيك يكتكوته . عامله اي . عاملك المفجأه دي عشان المرا الي فاتت كانت وحشه حقك عليا 😂♥. جاي اتكلم معاكي عن شعوري ليكي و حبي ليكي شويه . مش عارف ابدأ منين بس هسيبها علي الله 😂. بجدد انا بحبك اوي . انتي مش مجرد بنت عاديه ف حياتي و معايا انتي حلم حلمتو ف يوم من الايام و بطلبو من ربنا و الحمد الله اتحقق لحد م بقيتي كل حياتي . انتي حب سنين كتيره اوي عدت و مخرجتيش من بالي فيها . انتي مش مجرد بنت ف حياتي ي جنى انتي كل حياتي . و انا حياتي مبتكملش غير بيكي . و بجدد بحبك اكتر منتي متخيله . انتي كل حاجه بالنسبالي . الاخت و الصديقه و الحبيبه و كل حاجه . و بجدد مش عايز ابعد عنك . اول م شوفتك حسيت بشعور غريب اوي و راحه غريبه اوي و حبيتك تلقائي من شعوري اتجاهك . و لحد دلوقتي الشعور هوا هوا و عمري م هنسي شعوري اول م شوفتك . كان بجدد حلو اوي . و بجدد بحبك اوي و بحب كل حاجه فيكي . بحب ضحكتك و بحب كسوفك و بحب طريقتك ف الكلام و بحب مشيتك و بحب صوتك و بحب كل حاجه فيكي بجدد . و بجدد نفسي نفضل مع بعض طول العمري و نكون حب بعض دايما . بجدد مش عارف السنين دي كلها عدت ازاي بالسرعه دي . لسه فاكر كل حاجه بالتفصيل و لسه فاكر كل بصه كنت ببصهالك و كل حاجه عملتها عشانك عشان اوصلك . فاكر كل الايام الي كنت بحاول اعرف بيها بيتك و فاكر كل الاوقات الي بقلدك فيها و ابصلك . و فاكر كل احساس بحسو اول م بشوفك . و فاكر كل حلم حلمتو انتي معايا فيه . بجدد انتي مش حب عادي جوايا . انتي حياتي كلها . بجدد مش عايز نبعد عن بعض لأن انا بجدد عمري م هعرف احب حد غيرك حتى لو احلي منك بمليون مرا عشان انا مبقتش شايف غيرك حلو بالنسبالي . انا بعشقك اوي ي جنى . مش بعرف اعبر عن حبي اوي بس هحاول 😂😂😂. عشان انا مهما حاولت اوصفلك حبي ليكي مش هعرف . ان شاء الله نبقي من نصيب بعض و نكون مع بعض و نكون اسعد اتنين ف الدنيا . و ان شاء الله احققلك كل الي نفسك فيه و نعيش حياه بنتمناها من ربنا و ان شاء الله كل حاجه نفسنا فيها تتحقق . و ان شاء الله اعرف اتقدملك و اتجوزك و ربنا يكرمني و اعمل كل الي قولت عليه انو مستحيل و واثق ف ربنا انو مش هيخذلني . يمكن مش بعرف اعبرلك عن حبي اوي ي جنى بس انتي بجدد اكتر شخص حبيتو ف حياتي . انتي مكنتيش مجرد حد دخل حياتي و ان الدنيا مش هتقف عليكي . بس الحقيقه ان اه هتقف عليكي و ان انا عمري مهشوف غيرك ف حياتي ولا هحب غيرك . انتي ملكتي حياتي كلها و قلبي مبقاش عايز غيرك يبقي فيه . انا آسف بجدد عن اي حاجه عملتها معاكي طول منا معاكي زعلتك و دايقتك مني . بس بجدد مكنش قصدي . انا معنديش اغلي منك ف حياتي يجنجونه 💕. انتي هتفضلي ف القلب و هتفضلي اول و آخر حب ليا . عمري مهنساكي ولا ابص لحد غيرك . و ربنا يخليكي ليا و ميحرمناش من بعض ابدا و يجعلك من نصيبي ي جنى . عشان انا مش عايز غيرك . و لو بعد الشر ملناش نصيب مع بعض . خليكي فاكرا اني عمري مهنساكي طول حياتي . و هفضل فاكرك و بحبك . عشان اني مكنتيش حب عادي انتي حب سنين و حياه اتمنيت اعيشها ف يوم من الايام . انا بجدد بحبك اوي . حقك عليا ينور عيني و متزعليش مني . عشان انا بجدد معنديش اغلي منك ف حياتي و بتمنا انك تبقي معايا طول حياتي دايما .                        🌹𝑰 𝑳𝑶𝑽𝑬 𝒀𝑶𝑼 🌹`;  
-      const typingSpeed = 40;  
-      let i = 0;  
-  
-      function typeWriter() {  
-        if (i < fullText.length) {  
-          textBox.textContent += fullText.charAt(i);  
-          i++;  
-          setTimeout(typeWriter, typingSpeed);  
-        } else {  
-          textEnd.style.display = "block";  
-        }  
-      }  
-  
-      typeWriter();  
-    }  
-  
-    function tryLogin() {  
-      if (passwordInput.value === "1052024") {  
-        passwordInput.disabled = true;  
-        loginBtn.disabled = true;  
-        showSecondPage();  
-      } else {  
-        errorMsg.classList.remove("hidden");  
-      }  
-    }  
-  
-    loginBtn.addEventListener("click", tryLogin);  
-    passwordInput.addEventListener("keydown", function(e) {  
-      if (e.key === "Enter") tryLogin();  
-      errorMsg.classList.add("hidden");  
-    });  
-  
-    const audio = document.getElementById('myAudio');  
+    <div class="names">
+      <h1>♥ JANA & YOSSEF ♥</h1>
+      <p>FOREVER</p>
+    </div>
+
+    <div class="heart-wrapper">
+      <svg class="heart-svg" viewBox="0 0 512 512">
+        <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" fill="hsl(0, 100%, 45%)"/>
+      </svg>
+      <div class="timer-overlay">
+        <div class="timer" id="timer"></div>
+      </div>
+    </div>
+
+    <div class="password-section" id="passwordSection">
+      <div class="lock-icon">🔒</div>
+      <input type="password" class="password-input" id="passwordInput" placeholder="ادخل كلمة السر" />
+      <button class="login-btn" id="loginBtn">جاهزه</button>
+      <p class="error-msg hidden" id="errorMsg">كلمة المرور خاطئة، حاول تاني ❌</p>
+    </div>
+
+    <div id="secretContent">
+      <div class="text-box-container">
+        <div class="text-box" id="textBox"></div>
+      </div>
+      <div class="text-end" id="textEnd">❤️‍🔥𝑩𝑨𝑯𝑬𝑩𝑬𝑲 𝑨𝑾𝑬𝑬❤️‍🔥</div>
+    </div>
+
+  </div>
+
+  <audio id="myAudio" loop>
+    <source src="AudioCutter_Albumaty.Com_adhm_nablsi_han_alan.mp3" type="audio/mpeg">
+    متصفحك لا يدعم تشغيل الصوت
+  </audio>
+
+  <script>
+    const START_DATE = new Date(2024, 4, 10, 18, 0, 0);
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = now.getTime() - START_DATE.getTime();
+      const totalSeconds = Math.floor(diff / 1000);
+
+      const years = Math.floor(totalSeconds / (365.25 * 24 * 3600));
+      const remainAfterYears = totalSeconds - years * Math.floor(365.25 * 24 * 3600);
+      const days = Math.floor(remainAfterYears / (24 * 3600));
+      const hours = Math.floor((remainAfterYears % (24 * 3600)) / 3600);
+      const minutes = Math.floor((remainAfterYears % 3600) / 60);
+      const seconds = remainAfterYears % 60;
+
+      const units = [
+        { label: "سنة", value: years },
+        { label: "يوم", value: days },
+        { label: "ساعة", value: hours },
+        { label: "دقيقة", value: minutes },
+        { label: "ثانية", value: seconds },
+      ];
+
+      const timerEl = document.getElementById("timer");
+      timerEl.innerHTML = units.map(u =>
+        `<div class="timer-unit">
+          <span class="timer-value">${String(u.value).padStart(2, "0")}</span>
+          <span class="timer-label">${u.label}</span>
+        </div>`
+      ).join("");
+    }
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+
+    function createFloatingHeart() {
+      const container = document.getElementById("floatingHearts");
+      const heart = document.createElement("div");
+      heart.classList.add("floating-heart");
+      heart.textContent = "♥";
+      heart.style.left = Math.random() * 100 + "%";
+      heart.style.fontSize = (20 + Math.random() * 25) + "px";
+      heart.style.animationDuration = (6 + Math.random() * 6) + "s";
+      container.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 12000);
+    }
+
+    for (let i = 0; i < 8; i++) {
+      setTimeout(createFloatingHeart, i * 500);
+    }
+    setInterval(createFloatingHeart, 1500);
+
+    const passwordInput = document.getElementById("passwordInput");
+    const loginBtn = document.getElementById("loginBtn");
+    const errorMsg = document.getElementById("errorMsg");
+    const secretContent = document.getElementById("secretContent");
+    const textBox = document.getElementById("textBox");
+    const textEnd = document.getElementById("textEnd");
+
+    function showSecondPage() {
+      secretContent.style.display = "flex";
+
+      const fullText = `       ازيك يكتكوته . عامله اي . عاملك المفجأه دي عشان المرا الي فاتت كانت وحشه حقك عليا 😂♥. جاي اتكلم معاكي عن شعوري ليكي و حبي ليكي شويه . مش عارف ابدأ منين بس هسيبها علي الله 😂. بجدد انا بحبك اوي . انتي مش مجرد بنت عاديه ف حياتي و معايا انتي حلم حلمتو ف يوم من الايام و بطلبو من ربنا و الحمد الله اتحقق لحد م بقيتي كل حياتي . انتي حب سنين كتيره اوي عدت و مخرجتيش من بالي فيها . انتي مش مجرد بنت ف حياتي ي جنى انتي كل حياتي . و انا حياتي مبتكملش غير بيكي . و بجدد بحبك اكتر منتي متخيله . انتي كل حاجه بالنسبالي . الاخت و الصديقه و الحبيبه و كل حاجه . و بجدد مش عايز ابعد عنك . اول م شوفتك حسيت بشعور غريب اوي و راحه غريبه اوي و حبيتك تلقائي من شعوري اتجاهك . و لحد دلوقتي الشعور هوا هوا و عمري م هنسي شعوري اول م شوفتك . كان بجدد حلو اوي . و بجدد بحبك اوي و بحب كل حاجه فيكي . بحب ضحكتك و بحب كسوفك و بحب طريقتك ف الكلام و بحب مشيتك و بحب صوتك و بحب كل حاجه فيكي بجدد . و بجدد نفسي نفضل مع بعض طول العمري و نكون حب بعض دايما . بجدد مش عارف السنين دي كلها عدت ازاي بالسرعه دي . لسه فاكر كل حاجه بالتفصيل و لسه فاكر كل بصه كنت ببصهالك و كل حاجه عملتها عشانك عشان اوصلك . فاكر كل الايام الي كنت بحاول اعرف بيها بيتك و فاكر كل الاوقات الي بقلدك فيها و ابصلك . و فاكر كل احساس بحسو اول م بشوفك . و فاكر كل حلم حلمتو انتي معايا فيه . بجدد انتي مش حب عادي جوايا . انتي حياتي كلها . بجدد مش عايز نبعد عن بعض لأن انا بجدد عمري م هعرف احب حد غيرك حتى لو احلي منك بمليون مرا عشان انا مبقتش شايف غيرك حلو بالنسبالي . انا بعشقك اوي ي جنى . مش بعرف اعبر عن حبي اوي بس هحاول 😂😂😂. عشان انا مهما حاولت اوصفلك حبي ليكي مش هعرف . ان شاء الله نبقي من نصيب بعض و نكون مع بعض و نكون اسعد اتنين ف الدنيا . و ان شاء الله احققلك كل الي نفسك فيه و نعيش حياه بنتمناها من ربنا و ان شاء الله كل حاجه نفسنا فيها تتحقق . و ان شاء الله اعرف اتقدملك و اتجوزك و ربنا يكرمني و اعمل كل الي قولت عليه انو مستحيل و واثق ف ربنا انو مش هيخذلني . يمكن مش بعرف اعبرلك عن حبي اوي ي جنى بس انتي بجدد اكتر شخص حبيتو ف حياتي . انتي مكنتيش مجرد حد دخل حياتي و ان الدنيا مش هتقف عليكي . بس الحقيقه ان اه هتقف عليكي و ان انا عمري مهشوف غيرك ف حياتي ولا هحب غيرك . انتي ملكتي حياتي كلها و قلبي مبقاش عايز غيرك يبقي فيه . انا آسف بجدد عن اي حاجه عملتها معاكي طول منا معاكي زعلتك و دايقتك مني . بس بجدد مكنش قصدي . انا معنديش اغلي منك ف حياتي يجنجونه 💕. انتي هتفضلي ف القلب و هتفضلي اول و آخر حب ليا . عمري مهنساكي ولا ابص لحد غيرك . و ربنا يخليكي ليا و ميحرمناش من بعض ابدا و يجعلك من نصيبي ي جنى . عشان انا مش عايز غيرك . و لو بعد الشر ملناش نصيب مع بعض . خليكي فاكرا اني عمري مهنساكي طول حياتي . و هفضل فاكرك و بحبك . عشان اني مكنتيش حب عادي انتي حب سنين و حياه اتمنيت اعيشها ف يوم من الايام . انا بجدد بحبك اوي . حقك عليا ينور عيني و متزعليش مني . عشان انا بجدد معنديش اغلي منك ف حياتي و بتمنا انك تبقي معايا طول حياتي دايما .                        🌹𝑰 𝑳𝑶𝑽𝑬 𝒀𝑶𝑼 🌹`;
+      const typingSpeed = 40;
+      let i = 0;
+
+      function typeWriter() {
+        if (i < fullText.length) {
+          textBox.textContent += fullText.charAt(i);
+          i++;
+          setTimeout(typeWriter, typingSpeed);
+        } else {
+          textEnd.style.display = "block";
+        }
+      }
+
+      typeWriter();
+    }
+
+    function tryLogin() {
+      if (passwordInput.value === "1052024") {
+        passwordInput.disabled = true;
+        loginBtn.disabled = true;
+        showSecondPage();
+      } else {
+        errorMsg.classList.remove("hidden");
+      }
+    }
+
+    loginBtn.addEventListener("click", tryLogin);
+    passwordInput.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") tryLogin();
+      errorMsg.classList.add("hidden");
+    });
+
+    const audio = document.getElementById('myAudio');
     document.addEventListener("click", function () {
   audio.play().catch(function(){});
 }, { once: true });
   </script>
-</body>  
-</html>  
+
+</body>
+</html>
