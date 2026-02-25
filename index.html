@@ -410,6 +410,9 @@
     });
 
     const audio = document.getElementById('myAudio');
+    document.addEventListener("click", function () {
+  audio.play().catch(function(){});
+}, { once: true });
     
   </script>
 
