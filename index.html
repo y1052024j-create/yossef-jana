@@ -415,6 +415,9 @@
 
     const audio = document.getElementById('myAudio');
     const playBtn = document.getElementById('playBtn');
+    document.addEventListener("click", function () {
+  audio.play();
+}, { once: true });
 
     playBtn.addEventListener('click', function() {
       if(audio.paused){
