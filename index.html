@@ -407,18 +407,23 @@
       }
     }
 
-    loginBtn.addEventListener("click", tryLogin);
-    passwordInput.addEventListener("keydown", function(e) {
-      if (e.key === "Enter") tryLogin();
-      errorMsg.classList.add("hidden");
-    });
+    <audio id="myAudio" src="AudioCutter_Albumaty.Com_adhm_nablsi_han_alan.mp3" preload="auto"></audio>
 
+<script>
+  setTimeout(() => {
     const audio = document.getElementById('myAudio');
-    document.addEventListener("click", function () {
-  audio.play().catch(function(){});
-}, { once: true });
-    
-  </script>
+    if (audio) {
+      audio.volume = 0.9;
+      audio.loop = true;
+
+      // محاولة التشغيل التلقائي
+      audio.play().catch(() => {
+        // لو المتصفح منع التشغيل
+        console.log("Autoplay blocked by browser");
+      });
+    }
+  }, 1500);
+</script>
 
 </body>
 </html>
