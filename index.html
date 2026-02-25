@@ -408,22 +408,28 @@
     }
 
     <audio id="myAudio" src="AudioCutter_Albumaty.Com_adhm_nablsi_han_alan.mp3" preload="auto"></audio>
+else if(b.type==='music' && b.fileData){
 
-<script>
-  setTimeout(() => {
-    const audio = document.getElementById('myAudio');
-    if (audio) {
+  // مش هنعرض اي زرار او اسم
+  content = <audio id="audio_${b.id}" src="${b.fileData}" preload="auto"></audio>;
+
+  // تشغيل تلقائي في الخلفية
+  setTimeout(()=>{
+    const audio = document.getElementById("audio_"+b.id);
+    if(audio){
       audio.volume = 0.9;
       audio.loop = true;
 
-      // محاولة التشغيل التلقائي
-      audio.play().catch(() => {
+      // autoplay قوي
+      audio.play().catch(()=>{
         // لو المتصفح منع التشغيل
-        console.log("Autoplay blocked by browser");
+        document.body.addEventListener("click",()=>{
+          audio.play();
+        },{once:true});
       });
     }
-  }, 1500);
+  },1500);
+}
 </script>
-
 </body>
 </html>
